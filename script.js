@@ -69,8 +69,7 @@ function displayNote(note) {
         <h3>${note.title}</h3>
         <p>${note.content}</p>
         <div class="tags">${note.tags.map(tag => `#${tag}`).join(' ')}</div>
-        <button onclick="deleteNote(${note.id})">Excluir</button>
-    `;
+        <button class="delete-btn" onclick="deleteNote(${note.id})"> 🗑 Excluir </button>`;
 
 
     notesList.appendChild(noteItem); // Adicionar a nota à lista de notas
@@ -98,10 +97,18 @@ function getNotesFromLocalStorage() {
 }
 
 
-// Função para excluir uma nota
+// Função para excluir uma nota com confirmação
 function deleteNote(id) {
-    let notes = getNotesFromLocalStorage(); // Obter as notas do localStorage
-    notes = notes.filter(note => note.id !== id); // Filtrar a nota a ser excluída
-    localStorage.setItem('notes', JSON.stringify(notes)); // Salvar a lista atualizada no localStorage
-    document.querySelector(`[data-id="${id}"]`).remove(); // Remover a nota da lista exibida
+
+    const confirmDelete = confirm("Deseja realmente excluir esta nota?");
+
+    if (!confirmDelete) return;
+
+    let notes = getNotesFromLocalStorage();
+
+    notes = notes.filter(note => note.id !== id);
+
+    localStorage.setItem('notes', JSON.stringify(notes));
+
+    document.querySelector(`[data-id="${id}"]`).remove();
 }
