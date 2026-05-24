@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Notefy Studio</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:Inter,sans-serif;
+background:#050816;
+color:white;
+overflow-x:hidden;
+
+}
+
+.hero-bg{
+
+position:fixed;
+inset:0;
+
+background:
+
+radial-gradient(circle at 20% 20%,
+rgba(124,58,237,.25),
+transparent 35%),
+
+radial-gradient(circle at 80% 20%,
+rgba(37,99,235,.25),
+transparent 35%),
+
+radial-gradient(circle at 50% 80%,
+rgba(6,182,212,.15),
+transparent 40%);
+
+pointer-events:none;
+
+}
+
+.nav{
+
+position:relative;
+z-index:10;
+
+max-width:1400px;
+margin:auto;
+
+padding:25px 30px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+.logo{
+
+font-size:34px;
+font-weight:900;
+
+}
+
+.logo span{
+
+color:#5865f2;
+
+}
+
+.nav-buttons{
+
+display:flex;
+gap:12px;
+
+}
+
+.btn{
+
+border:none;
+cursor:pointer;
+
+padding:14px 24px;
+
+border-radius:18px;
+
+font-weight:800;
+
+}
+
+.btn-primary{
+
+background:
+linear-gradient(
+135deg,
+#5865f2,
+#7c3aed
+);
+
+color:white;
+
+}
+
+.btn-dark{
+
+background:#131c31;
+color:white;
+
+}
+
+.hero{
+
+position:relative;
+z-index:2;
+
+max-width:1400px;
+margin:auto;
+
+padding:60px 30px;
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+
+align-items:center;
+
+min-height:85vh;
+
+}
+
+.hero-text h1{
+
+font-size:84px;
+line-height:.9;
+
+font-weight:900;
+
+margin-bottom:25px;
+
+}
+
+.hero-text p{
+
+font-size:20px;
+
+color:#9aa4b2;
+
+line-height:1.8;
+
+max-width:650px;
+
+margin-bottom:30px;
+
+}
+
+.hero-actions{
+
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+
+}
+
+.cards-scene{
+
+position:relative;
+height:700px;
+
+}
+
+.floating-card{
+
+position:absolute;
+
+border-radius:34px;
+
+background:
+rgba(255,255,255,.05);
+
+backdrop-filter:blur(30px);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+overflow:hidden;
+
+box-shadow:
+0 30px 80px rgba(0,0,0,.35);
+
+animation:
+float 6s ease-in-out infinite;
+
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-18px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+.instagram-card{
+
+width:320px;
+height:420px;
+
+top:20px;
+left:0;
+
+transform:
+rotate(-8deg);
+
+}
+
+.twitter-card{
+
+width:340px;
+height:260px;
+
+right:0;
+top:100px;
+
+transform:
+rotate(8deg);
+
+animation-delay:1s;
+
+}
+
+.kanye-card{
+
+width:260px;
+height:220px;
+
+bottom:60px;
+left:140px;
+
+animation-delay:2s;
+
+}
+
+.card-top{
+
+padding:18px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+.user{
+
+display:flex;
+gap:12px;
+align-items:center;
+
+}
+
+.avatar{
+
+width:48px;
+height:48px;
+
+border-radius:50%;
+
+background:
+linear-gradient(
+135deg,
+#5865f2,
+#7c3aed
+);
+
+}
+
+.card-body{
+
+padding:20px;
+
+}
+
+.gradient-post{
+
+height:220px;
+
+border-radius:24px;
+
+background:
+linear-gradient(
+135deg,
+#7c3aed,
+#5865f2
+);
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+text-align:center;
+
+font-size:42px;
+font-weight:900;
+
+}
+
+.twitter-text{
+
+font-size:22px;
+
+line-height:1.6;
+
+}
+
+.kanye-minimal{
+
+height:100%;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+text-align:center;
+
+padding:20px;
+
+}
+
+.kanye-minimal h2{
+
+font-size:42px;
+
+line-height:1;
+
+margin-bottom:10px;
+
+}
+
+.features{
+
+max-width:1400px;
+margin:auto;
+
+padding:100px 30px;
+
+}
+
+.section-title{
+
+font-size:56px;
+
+text-align:center;
+
+margin-bottom:60px;
+
+}
+
+.feature-grid{
+
+display:grid;
+grid-template-columns:
+repeat(3,1fr);
+
+gap:25px;
+
+}
+
+.feature-card{
+
+background:#0f1729;
+
+border-radius:28px;
+
+padding:35px;
+
+border:
+1px solid rgba(255,255,255,.06);
+
+}
+
+.feature-card i{
+
+font-size:40px;
+
+margin-bottom:20px;
+
+color:#5865f2;
+
+}
+
+.feature-card h3{
+
+margin-bottom:15px;
+
+}
+
+.feature-card p{
+
+color:#9aa4b2;
+
+line-height:1.7;
+
+}
+
+.cta{
+
+padding:120px 30px;
+
+text-align:center;
+
+}
+
+.cta h2{
+
+font-size:72px;
+
+margin-bottom:25px;
+
+}
+
+.cta p{
+
+max-width:700px;
+
+margin:auto;
+
+color:#9aa4b2;
+
+margin-bottom:30px;
+
+font-size:18px;
+
+}
+
+@media(max-width:1100px){
+
+.hero{
+
+grid-template-columns:1fr;
+
+}
+
+.cards-scene{
+
+height:850px;
+
+}
+
+.hero-text h1{
+
+font-size:62px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.hero-text h1{
+
+font-size:46px;
+
+}
+
+.cards-scene{
+
+height:auto;
+display:flex;
+flex-direction:column;
+gap:25px;
+
+}
+
+.floating-card{
+
+position:relative;
+
+width:100% !important;
+height:auto !important;
+
+left:auto !important;
+right:auto !important;
+top:auto !important;
+bottom:auto !important;
+
+transform:none !important;
+
+}
+
+.feature-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.section-title{
+
+font-size:42px;
+
+}
+
+.cta h2{
+
+font-size:48px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="hero-bg"></div>
+
+<nav class="nav">
+
+<div class="logo">
+Note<span>fy</span>
+</div>
+
+<div class="nav-buttons">
+
+<button
+class="btn btn-dark"
+onclick="window.location.href='login.index.html'">
+Entrar
+</button>
+
+<button
+class="btn btn-primary"
+onclick="window.location.href='cadastro.html'">
+Criar Conta
+</button>
+
+</div>
+
+</nav>
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>
+
+CRIE POSTS
+VIRAIS EM
+SEGUNDOS
+
+</h1>
+
+<p>
+
+Crie conteúdos para Instagram,
+Stories e X com visual premium,
+efeitos modernos e exportação
+em alta qualidade.
+
+</p>
+
+<div class="hero-actions">
+
+<button
+class="btn btn-primary"
+onclick="window.location.href='cadastro.html'">
+
+Começar Grátis
+
+</button>
+
+<button
+class="btn btn-dark">
+
+Ver Templates
+
+</button>
+
+</div>
+
+</div>
+
+<div class="cards-scene">
+
+<div class="floating-card instagram-card">
+
+<div class="card-top">
+
+<div class="user">
+
+<div class="avatar"></div>
+
+<div>
+
+<strong>
+Snoop Dogg ✓
+</strong>
+
+<br>
+
+<small>
+89,4 mi seguidores
+</small>
+
+</div>
+
+</div>
+
+<i class="fa-solid fa-ellipsis"></i>
+
+</div>
+
+<div class="card-body">
+
+<div class="gradient-post">
+
+SOCIAL
+ENERGY
+
+</div>
+
+</div>
+
+</div>
+
+<div class="floating-card twitter-card">
+
+<div class="card-top">
+
+<div class="user">
+
+<div class="avatar"></div>
+
+<div>
+
+<strong>
+Justin Bieber ✓
+</strong>
+
+<br>
+
+<small>
+@justinbieber
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card-body">
+
+<div class="twitter-text">
+
+"esse design ficou
+simplesmente absurdo 🔥"
+
+</div>
+
+</div>
+
+</div>
+
+<div class="floating-card kanye-card">
+
+<div class="kanye-minimal">
+
+<h2>
+
+LESS
+NOISE
+
+</h2>
+
+<p>
+
+Luxury visual identity
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="features">
+
+<h2 class="section-title">
+
+Tudo que você precisa
+
+</h2>
+
+<div class="feature-grid">
+
+<div class="feature-card">
+
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+
+<h3>
+Templates Premium
+</h3>
+
+<p>
+
+Instagram, Stories,
+X/Twitter e muito mais.
+
+</p>
+
+</div>
+
+<div class="feature-card">
+
+<i class="fa-solid fa-download"></i>
+
+<h3>
+Exportação PNG
+</h3>
+
+<p>
+
+Baixe suas artes
+em alta qualidade.
+
+</p>
+
+</div>
+
+<div class="feature-card">
+
+<i class="fa-solid fa-share-nodes"></i>
+
+<h3>
+Compartilhamento
+</h3>
+
+<p>
+
+Envie diretamente para
+apps compatíveis.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="cta">
+
+<h2>
+
+Pronto para criar
+conteúdo viral?
+
+</h2>
+
+<p>
+
+Junte-se ao Notefy Studio
+e comece a produzir artes
+profissionais agora mesmo.
+
+</p>
+
+<button
+class="btn btn-primary"
+onclick="window.location.href='cadastro.html'">
+
+Começar Agora
+
+</button>
+
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
