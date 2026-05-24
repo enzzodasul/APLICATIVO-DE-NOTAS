@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Entrar - Notefy Studio</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top right,#5865f230,transparent 40%),
+    radial-gradient(circle at bottom left,#7c3aed30,transparent 40%),
+    #050816;
+    font-family:Inter,sans-serif;
+    color:white;
+}
+
+.login-layout{
+    min-height:100vh;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
+
+.login-left{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
+
+.login-card{
+    width:100%;
+    max-width:480px;
+    background:#0f1729;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:32px;
+    padding:40px;
+    backdrop-filter:blur(20px);
+}
+
+.logo{
+    font-size:42px;
+    font-weight:900;
+    margin-bottom:10px;
+}
+
+.logo span{
+    color:#5865f2;
+}
+
+.subtitle{
+    opacity:.7;
+    line-height:1.7;
+    margin-bottom:35px;
+}
+
+.input-group{
+    margin-bottom:20px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.input-group input{
+    width:100%;
+    border:none;
+    outline:none;
+    background:#131c31;
+    color:white;
+    padding:16px;
+    border-radius:16px;
+}
+
+.primary-btn{
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:18px;
+    cursor:pointer;
+    font-weight:800;
+    color:white;
+    background:
+    linear-gradient(
+        135deg,
+        #5865f2,
+        #7c3aed
+    );
+    margin-top:10px;
+}
+
+.secondary-btn{
+    width:100%;
+    margin-top:12px;
+    padding:18px;
+    border:none;
+    border-radius:18px;
+    cursor:pointer;
+    font-weight:700;
+    color:white;
+    background:#131c31;
+}
+
+.bottom-link{
+    text-align:center;
+    margin-top:24px;
+}
+
+.bottom-link a{
+    color:white;
+    text-decoration:none;
+    opacity:.7;
+}
+
+.login-right{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:50px;
+}
+
+.preview-card{
+    width:100%;
+    max-width:520px;
+    aspect-ratio:1/1;
+    border-radius:40px;
+    overflow:hidden;
+    background:
+    linear-gradient(
+        135deg,
+        #7c3aed,
+        #5865f2
+    );
+    position:relative;
+    box-shadow:
+    0 30px 80px rgba(0,0,0,.45);
+}
+
+.preview-overlay{
+    position:absolute;
+    inset:0;
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,.5),
+        transparent
+    );
+}
+
+.preview-content{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:40px;
+}
+
+.preview-content span{
+    opacity:.8;
+}
+
+.preview-content h2{
+    font-size:60px;
+    line-height:1;
+    margin:10px 0;
+}
+
+.preview-content p{
+    font-size:18px;
+    opacity:.9;
+}
+
+@media(max-width:1000px){
+
+    .login-layout{
+        grid-template-columns:1fr;
+    }
+
+    .login-right{
+        display:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-layout">
+
+    <div class="login-left">
+
+        <div class="login-card">
+
+            <div class="logo">
+                Note<span>fy</span>
+            </div>
+
+            <p class="subtitle">
+                Entre na plataforma e crie posts
+                instagramáveis, stories modernos,
+                tweets virais e conteúdos premium.
+            </p>
+
+            <div class="input-group">
+
+                <label>Email</label>
+
+                <input
+                type="email"
+                id="email"
+                placeholder="Digite seu email">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Senha</label>
+
+                <input
+                type="password"
+                id="senha"
+                placeholder="Digite sua senha">
+
+            </div>
+
+            <button
+            class="primary-btn"
+            onclick="fazerLogin()">
+
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                Entrar
+
+            </button>
+
+            <button
+            class="secondary-btn"
+            onclick="window.location.href='cadastro.html'">
+
+                Criar Conta
+
+            </button>
+
+            <div class="bottom-link">
+
+                <a href="home.html">
+                    ← Voltar para Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="login-right">
+
+        <div class="preview-card">
+
+            <div class="preview-overlay"></div>
+
+            <div class="preview-content">
+
+                <span>
+                    NOTEFY STUDIO
+                </span>
+
+                <h2>
+                    CREATE
+                    VIRAL
+                    POSTS
+                </h2>
+
+                <p>
+                    Templates modernos para Instagram,
+                    Stories e X/Twitter.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
