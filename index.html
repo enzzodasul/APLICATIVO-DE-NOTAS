@@ -1,808 +1,565 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Notefy Studio</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Inter, sans-serif;
+        background: #050816;
+        color: white;
+        overflow-x: hidden;
+      }
+
+      .hero-bg {
+        position: fixed;
+        inset: 0;
+
+        background:
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(124, 58, 237, 0.25),
+            transparent 35%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(37, 99, 235, 0.25),
+            transparent 35%
+          ),
+          radial-gradient(
+            circle at 50% 80%,
+            rgba(6, 182, 212, 0.15),
+            transparent 40%
+          );
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        pointer-events: none;
+      }
 
-<title>Notefy Studio</title>
+      .nav {
+        position: relative;
+        z-index: 10;
 
-<link rel="stylesheet" href="style.css">
+        max-width: 1400px;
+        margin: auto;
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        padding: 25px 30px;
 
-<style>
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+      .logo {
+        font-size: 34px;
+        font-weight: 900;
+      }
 
-body{
+      .logo span {
+        color: #5865f2;
+      }
 
-font-family:Inter,sans-serif;
-background:#050816;
-color:white;
-overflow-x:hidden;
+      .nav-buttons {
+        display: flex;
+        gap: 12px;
+      }
 
-}
+      .btn {
+        border: none;
+        cursor: pointer;
 
-.hero-bg{
+        padding: 14px 24px;
 
-position:fixed;
-inset:0;
+        border-radius: 18px;
 
-background:
+        font-weight: 800;
+      }
 
-radial-gradient(circle at 20% 20%,
-rgba(124,58,237,.25),
-transparent 35%),
+      .btn-primary {
+        background: linear-gradient(135deg, #5865f2, #7c3aed);
 
-radial-gradient(circle at 80% 20%,
-rgba(37,99,235,.25),
-transparent 35%),
+        color: white;
+      }
 
-radial-gradient(circle at 50% 80%,
-rgba(6,182,212,.15),
-transparent 40%);
+      .btn-dark {
+        background: #131c31;
+        color: white;
+      }
 
-pointer-events:none;
+      .hero {
+        position: relative;
+        z-index: 2;
 
-}
+        max-width: 1400px;
+        margin: auto;
 
-.nav{
+        padding: 60px 30px;
 
-position:relative;
-z-index:10;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
 
-max-width:1400px;
-margin:auto;
+        align-items: center;
 
-padding:25px 30px;
+        min-height: 85vh;
+      }
 
-display:flex;
-justify-content:space-between;
-align-items:center;
+      .hero-text h1 {
+        font-size: 84px;
+        line-height: 0.9;
 
-}
+        font-weight: 900;
 
-.logo{
+        margin-bottom: 25px;
+      }
 
-font-size:34px;
-font-weight:900;
+      .hero-text p {
+        font-size: 20px;
 
-}
+        color: #9aa4b2;
 
-.logo span{
+        line-height: 1.8;
 
-color:#5865f2;
+        max-width: 650px;
 
-}
+        margin-bottom: 30px;
+      }
 
-.nav-buttons{
+      .hero-actions {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
 
-display:flex;
-gap:12px;
+      .cards-scene {
+        position: relative;
+        height: 700px;
+      }
 
-}
+      .floating-card {
+        position: absolute;
 
-.btn{
+        border-radius: 34px;
 
-border:none;
-cursor:pointer;
+        background: rgba(255, 255, 255, 0.05);
 
-padding:14px 24px;
+        backdrop-filter: blur(30px);
 
-border-radius:18px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
 
-font-weight:800;
+        overflow: hidden;
 
-}
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
 
-.btn-primary{
+        animation: float 6s ease-in-out infinite;
+      }
 
-background:
-linear-gradient(
-135deg,
-#5865f2,
-#7c3aed
-);
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
 
-color:white;
+        50% {
+          transform: translateY(-18px);
+        }
 
-}
+        100% {
+          transform: translateY(0px);
+        }
+      }
 
-.btn-dark{
+      .instagram-card {
+        width: 320px;
+        height: 420px;
 
-background:#131c31;
-color:white;
+        top: 20px;
+        left: 0;
 
-}
+        transform: rotate(-8deg);
+      }
 
-.hero{
+      .twitter-card {
+        width: 340px;
+        height: 260px;
 
-position:relative;
-z-index:2;
+        right: 0;
+        top: 100px;
 
-max-width:1400px;
-margin:auto;
+        transform: rotate(8deg);
 
-padding:60px 30px;
+        animation-delay: 1s;
+      }
 
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:40px;
+      .kanye-card {
+        width: 260px;
+        height: 220px;
 
-align-items:center;
+        bottom: 60px;
+        left: 140px;
 
-min-height:85vh;
+        animation-delay: 2s;
+      }
 
-}
+      .card-top {
+        padding: 18px;
 
-.hero-text h1{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-font-size:84px;
-line-height:.9;
+      .user {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
 
-font-weight:900;
+      .avatar {
+        width: 48px;
+        height: 48px;
 
-margin-bottom:25px;
+        border-radius: 50%;
 
-}
+        background: linear-gradient(135deg, #5865f2, #7c3aed);
+      }
 
-.hero-text p{
+      .card-body {
+        padding: 20px;
+      }
 
-font-size:20px;
+      .gradient-post {
+        height: 220px;
 
-color:#9aa4b2;
+        border-radius: 24px;
 
-line-height:1.8;
+        background: linear-gradient(135deg, #7c3aed, #5865f2);
 
-max-width:650px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-margin-bottom:30px;
+        text-align: center;
 
-}
+        font-size: 42px;
+        font-weight: 900;
+      }
 
-.hero-actions{
+      .twitter-text {
+        font-size: 22px;
 
-display:flex;
-gap:15px;
-flex-wrap:wrap;
+        line-height: 1.6;
+      }
 
-}
+      .kanye-minimal {
+        height: 100%;
 
-.cards-scene{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
-position:relative;
-height:700px;
+        text-align: center;
 
-}
+        padding: 20px;
+      }
 
-.floating-card{
+      .kanye-minimal h2 {
+        font-size: 42px;
 
-position:absolute;
+        line-height: 1;
 
-border-radius:34px;
+        margin-bottom: 10px;
+      }
 
-background:
-rgba(255,255,255,.05);
+      .features {
+        max-width: 1400px;
+        margin: auto;
 
-backdrop-filter:blur(30px);
+        padding: 100px 30px;
+      }
 
-border:
-1px solid rgba(255,255,255,.08);
+      .section-title {
+        font-size: 56px;
 
-overflow:hidden;
+        text-align: center;
 
-box-shadow:
-0 30px 80px rgba(0,0,0,.35);
+        margin-bottom: 60px;
+      }
 
-animation:
-float 6s ease-in-out infinite;
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
 
-}
+        gap: 25px;
+      }
 
-@keyframes float{
+      .feature-card {
+        background: #0f1729;
 
-0%{
-transform:translateY(0px);
-}
+        border-radius: 28px;
 
-50%{
-transform:translateY(-18px);
-}
+        padding: 35px;
 
-100%{
-transform:translateY(0px);
-}
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
 
-}
+      .feature-card i {
+        font-size: 40px;
 
-.instagram-card{
+        margin-bottom: 20px;
 
-width:320px;
-height:420px;
+        color: #5865f2;
+      }
 
-top:20px;
-left:0;
+      .feature-card h3 {
+        margin-bottom: 15px;
+      }
 
-transform:
-rotate(-8deg);
+      .feature-card p {
+        color: #9aa4b2;
 
-}
+        line-height: 1.7;
+      }
 
-.twitter-card{
+      .cta {
+        padding: 120px 30px;
 
-width:340px;
-height:260px;
+        text-align: center;
+      }
 
-right:0;
-top:100px;
+      .cta h2 {
+        font-size: 72px;
 
-transform:
-rotate(8deg);
+        margin-bottom: 25px;
+      }
 
-animation-delay:1s;
+      .cta p {
+        max-width: 700px;
 
-}
+        margin: auto;
 
-.kanye-card{
+        color: #9aa4b2;
 
-width:260px;
-height:220px;
+        margin-bottom: 30px;
 
-bottom:60px;
-left:140px;
+        font-size: 18px;
+      }
 
-animation-delay:2s;
+      @media (max-width: 1100px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
 
-}
+        .cards-scene {
+          height: 850px;
+        }
 
-.card-top{
+        .hero-text h1 {
+          font-size: 62px;
+        }
+      }
 
-padding:18px;
+      @media (max-width: 768px) {
+        .hero-text h1 {
+          font-size: 46px;
+        }
 
-display:flex;
-justify-content:space-between;
-align-items:center;
+        .cards-scene {
+          height: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 25px;
+        }
 
-}
+        .floating-card {
+          position: relative;
 
-.user{
+          width: 100% !important;
+          height: auto !important;
 
-display:flex;
-gap:12px;
-align-items:center;
+          left: auto !important;
+          right: auto !important;
+          top: auto !important;
+          bottom: auto !important;
 
-}
+          transform: none !important;
+        }
 
-.avatar{
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
 
-width:48px;
-height:48px;
+        .section-title {
+          font-size: 42px;
+        }
 
-border-radius:50%;
+        .cta h2 {
+          font-size: 48px;
+        }
+      }
+    </style>
+  </head>
 
-background:
-linear-gradient(
-135deg,
-#5865f2,
-#7c3aed
-);
+  <body>
+    <div class="hero-bg"></div>
 
-}
+    <nav class="nav">
+      <div class="logo">Note<span>fy</span></div>
 
-.card-body{
+      <div class="nav-buttons">
+        <button
+          class="btn btn-dark"
+          onclick="window.location.href = 'PAGINA_DE_LOGIN/login.index.html'"
+        >
+          Entrar
+        </button>
 
-padding:20px;
+        <button
+          class="btn btn-primary"
+          onclick="window.location.href = 'PAGINA_DE_LOGIN/cadastro.html'"
+        >
+          Criar Conta
+        </button>
+      </div>
+    </nav>
 
-}
+    <section class="hero">
+      <div class="hero-text">
+        <h1>CRIE POSTS VIRAIS EM SEGUNDOS</h1>
 
-.gradient-post{
+        <p>
+          Crie conteúdos para Instagram, Stories e X com visual premium, efeitos
+          modernos e exportação em alta qualidade.
+        </p>
 
-height:220px;
+        <div class="hero-actions">
+          <button
+            class="btn btn-primary"
+            onclick="window.location.href = 'PAGINA_DE_LOGIN/notas.index.html'"
+          >
+            Começar Grátis
+          </button>
 
-border-radius:24px;
+          <button class="btn btn-dark">Ver Templates</button>
+        </div>
+      </div>
 
-background:
-linear-gradient(
-135deg,
-#7c3aed,
-#5865f2
-);
+      <div class="cards-scene">
+        <div class="floating-card instagram-card">
+          <div class="card-top">
+            <div class="user">
+              <div class="avatar"></div>
 
-display:flex;
-align-items:center;
-justify-content:center;
+              <div>
+                <strong> Snoop Dogg ✓ </strong>
 
-text-align:center;
+                <br />
 
-font-size:42px;
-font-weight:900;
+                <small> 89,4 mi seguidores </small>
+              </div>
+            </div>
 
-}
+            <i class="fa-solid fa-ellipsis"></i>
+          </div>
 
-.twitter-text{
+          <div class="card-body">
+            <div class="gradient-post">SOCIAL ENERGY</div>
+          </div>
+        </div>
 
-font-size:22px;
+        <div class="floating-card twitter-card">
+          <div class="card-top">
+            <div class="user">
+              <div class="avatar"></div>
 
-line-height:1.6;
+              <div>
+                <strong> Justin Bieber ✓ </strong>
 
-}
+                <br />
 
-.kanye-minimal{
+                <small> @justinbieber </small>
+              </div>
+            </div>
+          </div>
 
-height:100%;
+          <div class="card-body">
+            <div class="twitter-text">
+              "esse design ficou simplesmente absurdo 🔥"
+            </div>
+          </div>
+        </div>
 
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
+        <div class="floating-card kanye-card">
+          <div class="kanye-minimal">
+            <h2>LESS NOISE</h2>
 
-text-align:center;
+            <p>Luxury visual identity</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-padding:20px;
+    <section class="features">
+      <h2 class="section-title">Tudo que você precisa</h2>
 
-}
+      <div class="feature-grid">
+        <div class="feature-card">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
 
-.kanye-minimal h2{
+          <h3>Templates Premium</h3>
 
-font-size:42px;
+          <p>Instagram, Stories, X/Twitter e muito mais.</p>
+        </div>
 
-line-height:1;
+        <div class="feature-card">
+          <i class="fa-solid fa-download"></i>
 
-margin-bottom:10px;
+          <h3>Exportação PNG</h3>
 
-}
+          <p>Baixe suas artes em alta qualidade.</p>
+        </div>
 
-.features{
+        <div class="feature-card">
+          <i class="fa-solid fa-share-nodes"></i>
 
-max-width:1400px;
-margin:auto;
+          <h3>Compartilhamento</h3>
 
-padding:100px 30px;
+          <p>Envie diretamente para apps compatíveis.</p>
+        </div>
+      </div>
+    </section>
 
-}
+    <section class="cta">
+      <h2>Pronto para criar conteúdo viral?</h2>
 
-.section-title{
+      <p>
+        Junte-se ao Notefy Studio e comece a produzir artes profissionais agora
+        mesmo.
+      </p>
 
-font-size:56px;
+      <button
+        class="btn btn-primary"
+        onclick="window.location.href = 'PAGINA_DE_LOGIN/cadastro.html'"
+      >
+        Começar Agora
+      </button>
+    </section>
 
-text-align:center;
-
-margin-bottom:60px;
-
-}
-
-.feature-grid{
-
-display:grid;
-grid-template-columns:
-repeat(3,1fr);
-
-gap:25px;
-
-}
-
-.feature-card{
-
-background:#0f1729;
-
-border-radius:28px;
-
-padding:35px;
-
-border:
-1px solid rgba(255,255,255,.06);
-
-}
-
-.feature-card i{
-
-font-size:40px;
-
-margin-bottom:20px;
-
-color:#5865f2;
-
-}
-
-.feature-card h3{
-
-margin-bottom:15px;
-
-}
-
-.feature-card p{
-
-color:#9aa4b2;
-
-line-height:1.7;
-
-}
-
-.cta{
-
-padding:120px 30px;
-
-text-align:center;
-
-}
-
-.cta h2{
-
-font-size:72px;
-
-margin-bottom:25px;
-
-}
-
-.cta p{
-
-max-width:700px;
-
-margin:auto;
-
-color:#9aa4b2;
-
-margin-bottom:30px;
-
-font-size:18px;
-
-}
-
-@media(max-width:1100px){
-
-.hero{
-
-grid-template-columns:1fr;
-
-}
-
-.cards-scene{
-
-height:850px;
-
-}
-
-.hero-text h1{
-
-font-size:62px;
-
-}
-
-}
-
-@media(max-width:768px){
-
-.hero-text h1{
-
-font-size:46px;
-
-}
-
-.cards-scene{
-
-height:auto;
-display:flex;
-flex-direction:column;
-gap:25px;
-
-}
-
-.floating-card{
-
-position:relative;
-
-width:100% !important;
-height:auto !important;
-
-left:auto !important;
-right:auto !important;
-top:auto !important;
-bottom:auto !important;
-
-transform:none !important;
-
-}
-
-.feature-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.section-title{
-
-font-size:42px;
-
-}
-
-.cta h2{
-
-font-size:48px;
-
-}
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="hero-bg"></div>
-
-<nav class="nav">
-
-<div class="logo">
-Note<span>fy</span>
-</div>
-
-<div class="nav-buttons">
-
-<button
-class="btn btn-dark"
-onclick="window.location.href='login.index.html'">
-Entrar
-</button>
-
-<button
-class="btn btn-primary"
-onclick="window.location.href='cadastro.html'">
-Criar Conta
-</button>
-
-</div>
-
-</nav>
-
-<section class="hero">
-
-<div class="hero-text">
-
-<h1>
-
-CRIE POSTS
-VIRAIS EM
-SEGUNDOS
-
-</h1>
-
-<p>
-
-Crie conteúdos para Instagram,
-Stories e X com visual premium,
-efeitos modernos e exportação
-em alta qualidade.
-
-</p>
-
-<div class="hero-actions">
-
-<button
-class="btn btn-primary"
-onclick="window.location.href='cadastro.html'">
-
-Começar Grátis
-
-</button>
-
-<button
-class="btn btn-dark">
-
-Ver Templates
-
-</button>
-
-</div>
-
-</div>
-
-<div class="cards-scene">
-
-<div class="floating-card instagram-card">
-
-<div class="card-top">
-
-<div class="user">
-
-<div class="avatar"></div>
-
-<div>
-
-<strong>
-Snoop Dogg ✓
-</strong>
-
-<br>
-
-<small>
-89,4 mi seguidores
-</small>
-
-</div>
-
-</div>
-
-<i class="fa-solid fa-ellipsis"></i>
-
-</div>
-
-<div class="card-body">
-
-<div class="gradient-post">
-
-SOCIAL
-ENERGY
-
-</div>
-
-</div>
-
-</div>
-
-<div class="floating-card twitter-card">
-
-<div class="card-top">
-
-<div class="user">
-
-<div class="avatar"></div>
-
-<div>
-
-<strong>
-Justin Bieber ✓
-</strong>
-
-<br>
-
-<small>
-@justinbieber
-</small>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="card-body">
-
-<div class="twitter-text">
-
-"esse design ficou
-simplesmente absurdo 🔥"
-
-</div>
-
-</div>
-
-</div>
-
-<div class="floating-card kanye-card">
-
-<div class="kanye-minimal">
-
-<h2>
-
-LESS
-NOISE
-
-</h2>
-
-<p>
-
-Luxury visual identity
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="features">
-
-<h2 class="section-title">
-
-Tudo que você precisa
-
-</h2>
-
-<div class="feature-grid">
-
-<div class="feature-card">
-
-<i class="fa-solid fa-wand-magic-sparkles"></i>
-
-<h3>
-Templates Premium
-</h3>
-
-<p>
-
-Instagram, Stories,
-X/Twitter e muito mais.
-
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<i class="fa-solid fa-download"></i>
-
-<h3>
-Exportação PNG
-</h3>
-
-<p>
-
-Baixe suas artes
-em alta qualidade.
-
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<i class="fa-solid fa-share-nodes"></i>
-
-<h3>
-Compartilhamento
-</h3>
-
-<p>
-
-Envie diretamente para
-apps compatíveis.
-
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="cta">
-
-<h2>
-
-Pronto para criar
-conteúdo viral?
-
-</h2>
-
-<p>
-
-Junte-se ao Notefy Studio
-e comece a produzir artes
-profissionais agora mesmo.
-
-</p>
-
-<button
-class="btn btn-primary"
-onclick="window.location.href='cadastro.html'">
-
-Começar Agora
-
-</button>
-
-</section>
-
-<script src="script.js"></script>
-
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
