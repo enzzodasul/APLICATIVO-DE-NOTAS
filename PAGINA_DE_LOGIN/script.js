@@ -6,349 +6,207 @@ NOTEFY STUDIO
 TOAST
 ========================================= */
 
-function mostrarToast(texto){
+function mostrarToast(texto) {
+  const antigo = document.querySelector('.toast-notefy')
 
-    const antigo =
-    document.querySelector(".toast-notefy");
+  if (antigo) {
+    antigo.remove()
+  }
 
-    if(antigo){
-        antigo.remove();
-    }
+  const toast = document.createElement('div')
 
-    const toast =
-    document.createElement("div");
+  toast.className = 'toast-notefy'
 
-    toast.className =
-    "toast-notefy";
-
-    toast.innerHTML = `
+  toast.innerHTML = `
         ${texto}
-    `;
+    `
 
-    Object.assign(
-        toast.style,
-        {
-            position:"fixed",
-            right:"20px",
-            bottom:"20px",
-            background:"#131c31",
-            color:"#fff",
-            padding:"16px 22px",
-            borderRadius:"18px",
-            zIndex:"999999",
-            border:"1px solid rgba(255,255,255,.08)",
-            boxShadow:"0 20px 50px rgba(0,0,0,.35)"
-        }
-    );
+  Object.assign(toast.style, {
+    position: 'fixed',
+    right: '20px',
+    bottom: '20px',
+    background: '#131c31',
+    color: '#fff',
+    padding: '16px 22px',
+    borderRadius: '18px',
+    zIndex: '999999',
+    border: '1px solid rgba(255,255,255,.08)',
+    boxShadow: '0 20px 50px rgba(0,0,0,.35)',
+  })
 
-    document.body.appendChild(
-        toast
-    );
+  document.body.appendChild(toast)
 
-    setTimeout(()=>{
-
-        toast.remove();
-
-    },3000);
-
+  setTimeout(() => {
+    toast.remove()
+  }, 3000)
 }
 
 /* =========================================
 SALVAR USUARIO
 ========================================= */
 
-function salvarUsuario(
-    nome,
-    email
-){
+function salvarUsuario(nome, email) {
+  localStorage.setItem('notefy_nome', nome)
 
-    localStorage.setItem(
-        "notefy_nome",
-        nome
-    );
-
-    localStorage.setItem(
-        "notefy_email",
-        email
-    );
-
+  localStorage.setItem('notefy_email', email)
 }
 
 /* =========================================
 CRIAR CONTA
 ========================================= */
 
-function criarConta(){
+function criarConta() {
+  const nome = document.getElementById('nome')?.value.trim()
 
-    const nome =
-    document.getElementById("nome")?.value.trim();
+  const email = document.getElementById('email')?.value.trim()
 
-    const email =
-    document.getElementById("email")?.value.trim();
+  const senha = document.getElementById('senha')?.value
 
-    const senha =
-    document.getElementById("senha")?.value;
+  const confirmar = document.getElementById('confirmarSenha')?.value
 
-    const confirmar =
-    document.getElementById(
-        "confirmarSenha"
-    )?.value;
+  if (!nome) {
+    mostrarToast('Digite seu nome')
 
-    if(!nome){
+    return
+  }
 
-        mostrarToast(
-            "Digite seu nome"
-        );
+  if (!email) {
+    mostrarToast('Digite seu email')
 
-        return;
-    }
+    return
+  }
 
-    if(!email){
+  if (senha.length < 8) {
+    mostrarToast('Senha mínima de 8 caracteres')
 
-        mostrarToast(
-            "Digite seu email"
-        );
+    return
+  }
 
-        return;
-    }
+  if (senha !== confirmar) {
+    mostrarToast('As senhas não coincidem')
 
-    if(senha.length < 8){
+    return
+  }
 
-        mostrarToast(
-            "Senha mínima de 8 caracteres"
-        );
+  const usuario = {
+    nome,
+    email,
+    senha,
+    criadoEm: new Date().toISOString(),
+  }
 
-        return;
-    }
+  localStorage.setItem('notefy_user', JSON.stringify(usuario))
 
-    if(senha !== confirmar){
+  salvarUsuario(nome, email)
 
-        mostrarToast(
-            "As senhas não coincidem"
-        );
+  mostrarToast('Conta criada com sucesso 🚀')
 
-        return;
-    }
-
-    const usuario = {
-
-        nome,
-        email,
-        senha,
-        criadoEm:
-        new Date().toISOString()
-
-    };
-
-    localStorage.setItem(
-        "notefy_user",
-        JSON.stringify(usuario)
-    );
-
-    salvarUsuario(
-        nome,
-        email
-    );
-
-    mostrarToast(
-        "Conta criada com sucesso 🚀"
-    );
-
-    setTimeout(()=>{
-
-        window.location.href =
-        "notas.index.html";
-
-    },1200);
-
+  setTimeout(() => {
+    window.location.href = 'notas.index.html'
+  }, 1200)
 }
 
 /* =========================================
 LOGIN
 ========================================= */
 
-function fazerLogin(){
+function fazerLogin() {
+  const email = document.getElementById('email')?.value.trim()
 
-    const email =
-    document.getElementById("email")?.value.trim();
+  const senha = document.getElementById('senha')?.value
 
-    const senha =
-    document.getElementById("senha")?.value;
+  const usuario = JSON.parse(localStorage.getItem('notefy_user'))
 
-    const usuario =
-    JSON.parse(
-        localStorage.getItem(
-            "notefy_user"
-        )
-    );
+  if (!usuario) {
+    mostrarToast('Nenhuma conta encontrada')
 
-    if(!usuario){
+    return
+  }
 
-        mostrarToast(
-            "Nenhuma conta encontrada"
-        );
+  if (email === usuario.email && senha === usuario.senha) {
+    salvarUsuario(usuario.nome, usuario.email)
 
-        return;
-    }
+    mostrarToast('Login realizado ✨')
 
-    if(
-        email === usuario.email
-        &&
-        senha === usuario.senha
-    ){
-
-        salvarUsuario(
-            usuario.nome,
-            usuario.email
-        );
-
-        mostrarToast(
-            "Login realizado ✨"
-        );
-
-        setTimeout(()=>{
-
-            window.location.href =
-            "notas.index.html";
-
-        },1000);
-
-    }else{
-
-        mostrarToast(
-            "Email ou senha incorretos"
-        );
-
-    }
-
+    setTimeout(() => {
+      window.location.href = 'perfil_usuario/peril.index.html'
+    }, 1000)
+  } else {
+    mostrarToast('Email ou senha incorretos')
+  }
 }
 
 /* =========================================
 LOGOUT
 ========================================= */
 
-function logout(){
+function logout() {
+  localStorage.removeItem('notefy_nome')
 
-    localStorage.removeItem(
-        "notefy_nome"
-    );
+  localStorage.removeItem('notefy_email')
 
-    localStorage.removeItem(
-        "notefy_email"
-    );
-
-    window.location.href =
-    "login.index.html";
-
+  window.location.href = 'PAGINA_DE_LOGIN/login.index.html'
 }
 
 /* =========================================
 PROTECAO
 ========================================= */
 
-(function(){
+;(function () {
+  const pagina = window.location.pathname.toLowerCase()
 
-    const pagina =
-    window.location.pathname
-    .toLowerCase();
+  const protegidas = ['APLICATIVO-DE-NOTAS/PAGINA_DE_LOGIN/notas.index.html']
 
-    const protegidas = [
+  const precisaLogin = protegidas.some((item) => pagina.includes(item))
 
-        "notas.index.html"
+  if (!precisaLogin) {
+    return
+  }
 
-    ];
+  const nome = localStorage.getItem('notefy_nome')
 
-    const precisaLogin =
-    protegidas.some(
-        item =>
-        pagina.includes(item)
-    );
-
-    if(!precisaLogin){
-        return;
-    }
-
-    const nome =
-    localStorage.getItem(
-        "notefy_nome"
-    );
-
-    if(!nome){
-
-        window.location.href =
-        "login.index.html";
-
-    }
-
-})();
+  if (!nome) {
+    window.location.href = 'PAGINA_DE_LOGIN/login.index.html'
+  }
+})()
 
 /* =========================================
 WEB SHARE
 ========================================= */
 
-async function compartilharArquivo(
-    file
-){
+async function compartilharArquivo(file) {
+  if (
+    navigator.canShare &&
+    navigator.canShare({
+      files: [file],
+    })
+  ) {
+    try {
+      await navigator.share({
+        title: 'Notefy Studio',
 
-    if(
-        navigator.canShare &&
-        navigator.canShare({
-            files:[file]
-        })
-    ){
+        text: 'Criado com Notefy Studio',
 
-        try{
+        files: [file],
+      })
 
-            await navigator.share({
-
-                title:
-                "Notefy Studio",
-
-                text:
-                "Criado com Notefy Studio",
-
-                files:[file]
-
-            });
-
-            mostrarToast(
-                "Compartilhado 🚀"
-            );
-
-        }catch(error){
-
-            console.log(error);
-
-        }
-
-    }else{
-
-        mostrarToast(
-            "Seu dispositivo não suporta compartilhamento"
-        );
-
+      mostrarToast('Compartilhado 🚀')
+    } catch (error) {
+      console.log(error)
     }
-
+  } else {
+    mostrarToast('Seu dispositivo não suporta compartilhamento')
+  }
 }
 
 /* =========================================
 UTIL
 ========================================= */
 
-function obterUsuario(){
+function obterUsuario() {
+  return {
+    nome: localStorage.getItem('notefy_nome') || '',
 
-    return {
-
-        nome:
-        localStorage.getItem(
-            "notefy_nome"
-        ) || "",
-
-        email:
-        localStorage.getItem(
-            "notefy_email"
-        ) || ""
-
-    };
-
+    email: localStorage.getItem('notefy_email') || '',
+  }
 }
