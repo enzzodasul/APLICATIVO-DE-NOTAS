@@ -330,3 +330,113 @@ RESPONSIVO
   color: #5865f2;
 }
 
+/* PAINEL DIREITO / AÇÕES */
+
+.right-panel,
+.actions-panel,
+.stats-panel,
+.side-actions,
+.profile-actions {
+    display: flex !important;
+    flex-direction: column;
+
+    gap: 12px;
+
+    width: 280px !important;
+
+    min-width: 280px;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    position: relative;
+    z-index: 999;
+}
+
+/* BOTÕES */
+
+.right-panel button,
+.actions-panel button,
+.stats-panel button,
+.side-actions button,
+.profile-actions button {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border-radius:16px;
+
+    background:#151f36;
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.right-panel button:hover,
+.actions-panel button:hover,
+.stats-panel button:hover,
+.side-actions button:hover,
+.profile-actions button:hover{
+
+    background:#1d2845;
+
+    transform:translateY(-2px);
+}
+
+
+/* garante que a coluna não suma */
+.main-container,
+.dashboard,
+.content{
+    display:flex;
+    align-items:flex-start;
+    justify-content:flex-start;
+
+    gap:30px;
+
+    width:100%;
+}
+
+/* conteúdo principal ocupa espaço */
+.content-main{
+    flex:1;
+}
+
+/* painel da direita fixo */
+.right-panel{
+    width:280px;
+    min-width:280px;
+
+    display:flex !important;
+    flex-direction:column;
+
+    gap:12px;
+
+    visibility:visible !important;
+    opacity:1 !important;
+}
+
+
+/* evita corte */
+
+body{
+ overflow-x:hidden;
+}
+
+.main-container{
+ overflow:visible!important;
+}
+
+.hidden{
+   display:none;
+}
+
+.right-panel.hidden{
+   display:flex !important;
+}

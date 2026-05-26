@@ -67,7 +67,8 @@
 
         color: white;
 
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
       }
 
       body::before {
@@ -103,7 +104,7 @@
   position: relative;
   z-index: 2;
   display: flex;
-  height: 100vh;
+  min-height:100vh;
   width: 100vw;
   overflow: hidden;
 }
@@ -332,13 +333,8 @@
       }
 
       .workspace {
-        flex: 1;
-
-        display: flex;
-
-        flex-direction: column;
-
-        overflow: hidden;
+        flex:1;
+  overflow:auto;
       }
 
       .topbar {
@@ -559,29 +555,7 @@
 
         gap: 8px;
       }
-      .library-panel {
-
-  width: 320px;
-
-  min-width: 320px;
-
-  height: 100vh;
-
-  background: rgba(15, 23, 41, 0.95);
-
-  backdrop-filter: blur(20px);
-
-  border-left: 1px solid var(--border);
-
-  overflow-y: auto;
-
-  overflow-x: hidden;
-
-  padding: 20px;
-
-  flex-shrink: 0;
-
-}
+      
 
       .library-title {
         font-size: 12px;
@@ -837,61 +811,237 @@
         }
       }
 
-      @media (max-width: 980px) {
-        .app {
-          flex-direction: column;
+    /* LAYOUT PRINCIPAL */
+.app{
+    position:relative;
+    z-index:2;
 
-          overflow: auto;
-        }
+    display:grid;
+    grid-template-columns:340px 1fr 320px;
 
-        .sidebar {
-          width: 100%;
+    width:100%;
+    min-height:100vh;
 
-          height: auto;
+    overflow:hidden;
+}
 
-          border-right: none;
+/* ESQUERDA */
+.sidebar{
+    height:100vh;
 
-          border-bottom: 1px solid var(--border);
-        }
+    position:sticky;
+    top:0;
 
-        .workspace {
-          min-height: 100vh;
-        }
+    overflow-y:auto;
 
-        .library-panel {
-          display: block;
-        }
-      }
+    background:rgba(15,23,41,.95);
 
-      @media (max-width: 700px) {
-        .preview-area {
-          padding: 20px;
-        }
+    backdrop-filter:blur(30px);
 
-        .post-title {
-          font-size: 34px;
-        }
+    border-right:1px solid var(--border);
+}
 
-        .post-text {
-          font-size: 15px;
-        }
+/* CENTRO */
+.workspace{
+    min-width:0;
 
-        .template-grid {
-          grid-template-columns: 1fr;
-        }
+    height:100vh;
 
-        .template-grid-large {
-          grid-template-columns: 1fr;
-        }
+    overflow-y:auto;
+}
 
-        .toolbar {
-          grid-template-columns: 1fr;
-        }
+/* DIREITA */
+.library-panel{
+    height:100vh;
 
-        .topbar {
-          padding: 0 12px;
-        }
-      }
+    position:sticky;
+    top:0;
+
+    overflow-y:auto;
+
+    padding:22px;
+
+    background:rgba(10,16,32,.95);
+
+    backdrop-filter:blur(25px);
+
+    border-left:1px solid rgba(255,255,255,.06);
+
+    box-shadow:-15px 0 50px rgba(0,0,0,.35);
+
+    z-index:99;
+}
+/* RESPONSIVO */
+@media(max-width:1200px){
+
+.app{
+grid-template-columns:
+300px
+1fr;
+}
+
+.library-panel{
+display:none;
+}
+
+}
+
+@media (max-width:900px){
+
+/* app vira coluna */
+.app{
+display:flex;
+flex-direction:column;
+width:100%;
+min-height:100vh;
+overflow-x:hidden;
+}
+
+/* editor topo */
+.sidebar{
+position:relative;
+width:100%;
+min-width:100%;
+height:auto;
+
+padding:18px;
+
+border-right:none;
+border-bottom:1px solid var(--border);
+
+overflow:visible;
+}
+
+/* preview ocupa centro */
+.workspace{
+width:100%;
+height:auto;
+
+overflow:visible;
+
+padding-bottom:220px;
+}
+
+/* remove altura travada */
+.preview-area{
+padding:15px;
+display:flex;
+justify-content:center;
+align-items:flex-start;
+}
+
+/* preview grande no celular */
+.canvas-container{
+width:100%;
+max-width:100%;
+}
+
+.post-canvas{
+
+width:100%;
+
+max-width:500px;
+
+margin:auto;
+
+border-radius:24px;
+}
+
+/* painel inferior acessível */
+.library-panel{
+
+display:block;
+
+position:fixed;
+
+bottom:0;
+left:0;
+right:0;
+
+height:180px;
+
+padding:14px;
+
+z-index:99999;
+
+background:rgba(8,12,22,.98);
+
+backdrop-filter:blur(35px);
+
+border-top:1px solid rgba(255,255,255,.08);
+
+overflow:hidden;
+}
+
+/* ações deslizam horizontal */
+.quick-actions{
+
+display:flex;
+
+gap:12px;
+
+overflow-x:auto;
+
+overflow-y:hidden;
+
+padding-bottom:8px;
+
+scroll-snap-type:x mandatory;
+}
+
+.quick-actions::-webkit-scrollbar{
+display:none;
+}
+
+.action-btn{
+
+flex:none;
+
+min-width:150px;
+
+height:58px;
+
+scroll-snap-align:start;
+
+font-size:14px;
+}
+
+/* mantém cores visíveis */
+.asset-list{
+
+display:flex;
+
+gap:12px;
+
+overflow:auto;
+
+margin-bottom:12px;
+}
+
+.asset-list div{
+min-width:230px;
+}
+
+/* topbar organizada */
+.topbar{
+
+height:auto;
+
+padding:14px;
+
+gap:12px;
+
+flex-wrap:wrap;
+}
+
+/* botão flutuante sobe */
+.floating-save{
+
+bottom:210px;
+right:15px;
+}
+
+}
     </style>
   </head>
 
@@ -1069,171 +1219,169 @@
       </aside>
 
       <main class="workspace">
-        <div class="topbar">
-          <div class="topbar-left">
-            <div class="badge">Notefy Studio PRO</div>
-          </div>
-           <button type="button" class="btn btn-outline-dark" id="btn-perfil" ><a href="perfil_usuario/perfil.index.html"> Minha Conta</a></button> 
-       
 
-          <div class="topbar-right">
-            <button class="btn btn-secondary">Salvar Projeto</button>
-          </div>
+    <div class="topbar">
+        <div class="topbar-left">
+            <div class="badge">Notefy Studio PRO</div>
         </div>
 
-        <div class="preview-area">
-          <div class="canvas-container">
+        <a href="/PAGINA_DE_LOGIN/perfil_usuario/perfil.index.html"
+           style="text-decoration:none;">
+            <button
+                type="button"
+                class="btn btn-secondary"
+                id="btn-perfil">
+                Minha Conta
+            </button>
+        </a>
+
+        <div class="topbar-right">
+            <button class="btn btn-secondary">
+                Salvar Projeto
+            </button>
+        </div>
+    </div>
+
+    <div class="preview-area">
+        <div class="canvas-container">
+
             <div class="format-selector">
-              <button class="format-btn format-active">1080x1080</button>
+                <button class="format-btn format-active">
+                    1080x1080
+                </button>
 
-              <button class="format-btn">Story</button>
+                <button class="format-btn">
+                    Story
+                </button>
 
-              <button class="format-btn">YouTube</button>
+                <button class="format-btn">
+                    YouTube
+                </button>
             </div>
 
             <div class="post-canvas" id="postCanvas">
-              <div class="post-image" id="postImage"></div>
-
-              <div class="post-overlay"></div>
-
-              <div class="post-content">
-                <div class="profile">
-                  <div class="avatar"></div>
-
-                  <div>
-                    <div class="user-name" id="previewUser">@notefy</div>
-
-                    <div class="user-role">creator premium</div>
-                  </div>
-                </div>
-
-                <div class="post-title" id="previewTitle">CREATOR MODE</div>
-
-                <div class="post-text" id="previewText">
-                  Crie posts incríveis para redes sociais.
-                </div>
-
-                <div class="post-stats">
-                  <div>❤️ 4.8M</div>
-
-                  <div>💬 284k</div>
-
-                  <div>🔁 93k</div>
-                </div>
-              </div>
             </div>
-          </div>
+
         </div>
-      </main>
-    
+    </div>
 
-    <div class="library-panel">
-      <div class="library-title">Personalização</div>
+</main>
 
-      <div class="asset-list">
 
-<div style="grid-column:1 / -1;">
-  <label style="display:block;margin-bottom:8px;">
-    🎨 Cor do Fundo
-  </label>
+<!-- PAINEL DIREITO FORA DO MAIN -->
+<aside class="library-panel">
 
-  <input
-    type="color"
-    value="#5865f2"
-    onchange="changeBackgroundColor(this.value)"
-    style="
-      width:100%;
-      height:50px;
-      border:none;
-      border-radius:12px;
-      cursor:pointer;
-    "
-  >
+<div class="library-title">
+Personalização
 </div>
 
-<div style="grid-column:1 / -1;">
-  <label style="display:block;margin-bottom:8px;">
-    🔤 Cor do Texto
-  </label>
+<div class="asset-list">
 
-  <input
-    type="color"
-    value="#ffffff"
-    onchange="changeTextColor(this.value)"
-    style="
-      width:100%;
-      height:50px;
-      border:none;
-      border-radius:12px;
-      cursor:pointer;
-    "
-  >
+<div style="grid-column:1/-1;">
+
+<label>
+🎨 Cor do Fundo
+</label>
+
+<input
+type="color"
+value="#5865f2"
+onchange="changeBackgroundColor(this.value)"
+style="
+width:100%;
+height:50px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+">
+
 </div>
+
+<div style="grid-column:1/-1;">
+
+<label>
+🔤 Cor do Texto
+</label>
+
+<input
+type="color"
+value="#ffffff"
+onchange="changeTextColor(this.value)"
+style="
+width:100%;
+height:50px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+">
+
+</div>
+
+</div>
+
+
+<div class="quick-actions">
 
 <button class="action-btn" onclick="toggleImage()">
-🖼️ Mostrar/Ocultar Imagem
+🖼️ Imagem
 </button>
 
 <button class="action-btn" onclick="toggleTitle()">
-📌 Mostrar/Ocultar Título
+📌 Título
 </button>
 
 <button class="action-btn" onclick="toggleUser()">
-👤 Mostrar/Ocultar Usuário
+👤 Usuário
 </button>
 
 <button class="action-btn" onclick="toggleStats()">
-❤️ Mostrar/Ocultar Likes
+❤️ Likes
 </button>
 
 <button class="action-btn" onclick="editLikes()">
-❤️ Editar Likes
+Editar Likes
 </button>
 
 <button class="action-btn" onclick="editComments()">
-💬 Editar Comentários
+Comentários
 </button>
 
 <button class="action-btn" onclick="editShares()">
-🔁 Editar Compartilhamentos
+Compartilhar
 </button>
 
 <button class="action-btn" onclick="showIconsOnly()">
-✨ Apenas Ícones
+Ícones
 </button>
 
 <button class="action-btn" onclick="addShadow()">
-🌑 Sombra
+Sombra
 </button>
 
 <button class="action-btn" onclick="removeShadow()">
-☀️ Sem Sombra
+Sem sombra
 </button>
 
 <button class="action-btn" onclick="roundedPost()">
-⭕ Bordas Arredondadas
+Bordas
 </button>
 
 <button class="action-btn" onclick="squarePost()">
-⬜ Bordas Retas
+Retas
+</button>
+
+<button class="action-btn" onclick="exportPNG()">
+PNG
+</button>
+
+<button class="action-btn" onclick="shareDesign()">
+Share
 </button>
 
 </div>
 
-
-
-
-      <div class="quick-actions">
-        <button class="action-btn" onclick="exportPNG()">PNG</button>
-
-        <button class="action-btn" onclick="shareDesign()">Share</button>
-      </div>
-    </div>
-    </div>
-
-    <button class="floating-save" onclick="saveProject()">
-      <i class="fa-solid fa-floppy-disk"></i>
-    </button>
+</aside>
+</div>
 
     <script>
      
@@ -1277,7 +1425,9 @@
 
       const postCanvas = document.getElementById('postCanvas')
 
-      const postImage = document.getElementById('postImage')
+      function getPostImage() {
+      return document.getElementById('postImage')
+}
 
       let currentFormat = 'instagram'
 
@@ -1311,7 +1461,13 @@
 
   showTitle: true,
 
-  showUser: true
+  showUser: true,
+
+  showLikes: true,
+
+  showComments: true,
+
+  showShares: true,
 
 }
       titleInput.addEventListener('input', e => {
@@ -1343,19 +1499,7 @@ userInput.addEventListener('input', e => {
 })
       
 
-      imageInput.addEventListener('change', function () {
-        const file = this.files[0]
-
-        if (!file) return
-
-        const reader = new FileReader()
-
-        reader.onload = function (e) {
-          postImage.style.backgroundImage = `url(${e.target.result})`
-        }
-
-        reader.readAsDataURL(file)
-      })
+      
 
       function toast(text) {
         const div = document.createElement('div')
@@ -1467,6 +1611,7 @@ userInput.addEventListener('input', e => {
 
   postCanvas.innerHTML = `
 
+  
 <div style="
 height:100%;
 background:#000;
@@ -1478,12 +1623,14 @@ justify-content:space-between;
 
 <div>
 
-<div style="
+<div
+class="post-user"
+style="
 display:flex;
 align-items:center;
 gap:14px;
 margin-bottom:20px;
-display:${editorState.showUser ? 'flex' : 'none'};
+
 ">
 
 <div
@@ -1495,7 +1642,7 @@ border-radius:50%;
 background-image:url(${currentAvatarData || ''});
 background-size:cover;
 background-position:center;
-display:${editorState.showAvatar ? 'block' : 'none'};
+
 ">
 </div>
 
@@ -1554,22 +1701,37 @@ margin-bottom:18px;
 </div>
 
 <div style="
-display:${editorState.showStats ? 'flex' : 'none'};
+
 gap:28px;
 font-size:18px;
 ">
 
-<div>
+<div
+class="stat-comments"
+style="
+
+"
+>
 <i class="fa-regular fa-comment"></i>
 ${editorState.comments}
 </div>
 
-<div>
+<div
+class="stat-shares"
+style="
+
+"
+>
 <i class="fa-solid fa-retweet"></i>
 ${editorState.shares}
 </div>
 
-<div>
+<div
+class="stat-likes"
+style="
+
+"
+>
 <i class="fa-regular fa-heart"></i>
 ${editorState.likes}
 </div>
@@ -1585,6 +1747,7 @@ ${editorState.likes}
 </div>
 
 `
+applyGlobalVisibility()
 
 }
 
@@ -1596,7 +1759,7 @@ ${editorState.likes}
 class="post-image"
 style="
 background-image:url(${editorState.backgroundImage});
-display:${editorState.showBackground ? 'block' : 'none'};
+
 background-size:cover;
 background-position:center;
 ">
@@ -1609,13 +1772,13 @@ background-position:center;
 <div
 class="profile"
 style="
-display:${editorState.showUser ? 'flex' : 'none'};
+
 ">
 
 <div
 class="avatar"
 style="
-display:${editorState.showAvatar ? 'block' : 'block'};
+
 background-image:url(${currentAvatarData || ''});
 background-size:cover;
 background-position:center;
@@ -1644,7 +1807,7 @@ creator premium
 <div
 class="post-title"
 style="
-display:${editorState.showTitle ? 'block' : 'none'};
+
 ">
 
 ${editorState.title}
@@ -1657,30 +1820,9 @@ ${editorState.text}
 
 </div>
 
-<div
-class="post-stats"
-style="
-display:${editorState.showStats ? 'flex' : 'none'};
-">
-
-<div>
-❤️ ${editorState.likes}
-</div>
-
-<div>
-💬 ${editorState.comments}
-</div>
-
-<div>
-🔁 ${editorState.shares}
-</div>
-
-</div>
-
-</div>
-
+${getUniversalStatsHTML('dark')}
 `
-
+applyGlobalVisibility()
 }
 
 function renderTemplate() {
@@ -1731,7 +1873,7 @@ style="
 background-image:url(${editorState.backgroundImage});
 background-size:cover;
 background-position:center;
-display:${editorState.showBackground ? 'block' : 'none'};
+
 ">
 </div>
 
@@ -1768,7 +1910,7 @@ z-index:4;
 ">
 
 <div style="
-display:${editorState.showUser ? 'block' : 'none'};
+
 font-size:18px;
 font-weight:700;
 margin-bottom:20px;
@@ -1779,8 +1921,7 @@ ${editorState.username}
 </div>
 
 <div style="
-display:${editorState.showTitle ? 'block' : 'none'};
-font-size:52px;
+
 font-weight:900;
 line-height:.95;
 margin-bottom:18px;
@@ -1803,7 +1944,7 @@ ${editorState.text}
 </div>
 
 `
-
+applyGlobalVisibility()
 }
 
       function renderYoutubeMode() {
@@ -1874,37 +2015,54 @@ z-index:5;
 </div>
 
 `
+applyGlobalVisibility()
 
         restoreImage()
       }
 
-      function restoreImage() {
-        const img = document.getElementById('postImage')
+ function restoreImage() {
 
-        if (img && window.currentImageData) {
-          img.style.backgroundImage = `url(${window.currentImageData})`
+  const img =
+    document.getElementById('postImage') ||
+    document.querySelector('.post-image')
 
-          img.style.backgroundSize = 'cover'
+  if (img && window.currentImageData) {
 
-          img.style.backgroundPosition = 'center'
-        }
-      }
+    img.style.backgroundImage =
+      `url(${window.currentImageData})`
 
-      imageInput.addEventListener('change', function () {
-        const file = this.files[0]
+    img.style.backgroundSize = 'cover'
 
-        if (!file) return
+    img.style.backgroundPosition = 'center'
 
-        const reader = new FileReader()
+    img.style.backgroundRepeat = 'no-repeat'
+  }
+}
 
-        reader.onload = function (e) {
-          window.currentImageData = e.target.result
+    imageInput.addEventListener('change', function () {
 
-          restoreImage()
-        }
+  const file = this.files[0]
 
-        reader.readAsDataURL(file)
-      })
+  if (!file) return
+
+  const reader = new FileReader()
+
+  reader.onload = function (e) {
+
+    window.currentImageData = e.target.result
+
+    editorState.backgroundImage = e.target.result
+
+    restoreImage()
+
+    renderTemplate()
+
+  }
+
+  reader.readAsDataURL(file)
+
+})
+  
 
       
 
@@ -2026,33 +2184,35 @@ ${textInput.value || 'Seu conteúdo aparece aqui'}
 </div>
 
 <div style="
-display:flex;
-gap:24px;
-font-size:18px;
 padding-top:20px;
 border-top:1px solid rgba(0,0,0,.08);
 ">
-
-<div>❤️ 89 mil</div>
-<div>💬 12 mil</div>
-<div>🔁 4 mil</div>
-
+${getUniversalStatsHTML('light')}
 </div>
 
 </div>
 
 `
+applyGlobalVisibility()
       }
 
       
 
-      document.addEventListener('DOMContentLoaded', () => {
-        createAdvancedModes()
+     document.addEventListener('DOMContentLoaded', () => {
 
-        renderTemplate()
+   createAdvancedModes()
 
-        setFormat('instagram')
-      })
+   createViralTemplateMenu()
+
+   renderTemplate()
+
+   setFormat('instagram')
+
+   restoreAvatar()
+
+   restoreImage()
+
+}) 
 
       function tweetDarkTemplate() {
         postCanvas.style.background = '#000'
@@ -2140,22 +2300,14 @@ margin-bottom:15px;
 
 </div>
 
-<div style="
-display:flex;
-gap:30px;
-">
-
-<div>💬 12k</div>
-<div>🔁 5k</div>
-<div>❤️ 489k</div>
-
-</div>
+${getUniversalStatsHTML('dark')}
 
 </div>
 
 </div>
 
 `
+applyGlobalVisibility()
       }
 
       function tweetLightTemplate() {
@@ -2239,22 +2391,14 @@ margin-bottom:15px;
 
 </div>
 
-<div style="
-display:flex;
-gap:30px;
-">
-
-<div>💬 12k</div>
-<div>🔁 5k</div>
-<div>❤️ 489k</div>
-
-</div>
+${getUniversalStatsHTML('light')}
 
 </div>
 
 </div>
 
 `
+applyGlobalVisibility()
       }
 
       function whatsappTemplate() {
@@ -2372,15 +2516,14 @@ padding-top:18px;
 border-top:1px solid #ddd;
 ">
 
-<div>👍 28 mil</div>
-<div>💬 2 mil</div>
-<div>↗ Compartilhar</div>
+${getUniversalStatsHTML('light')}
 
 </div>
 
 </div>
 
 `
+applyGlobalVisibility()
       }
 
       function createViralTemplateMenu() {
@@ -2517,6 +2660,7 @@ ${textInput.value || 'Electronic • Synthwave • Chill'}
 </div>
 
 `
+applyGlobalVisibility()
       }
 
       function quoteTemplate() {
@@ -2569,6 +2713,7 @@ ${userInput.value || '@notefy'}
 </div>
 
 `
+applyGlobalVisibility()
       }
 
       document.addEventListener('DOMContentLoaded', () => {
@@ -2644,6 +2789,7 @@ font-size:14px;
 </div>
 
 `
+applyGlobalVisibility()
       }
 
       function promoTemplate() {
@@ -2704,6 +2850,7 @@ ${textInput.value || 'Promoção por tempo limitado'}
 </div>
 
 `
+applyGlobalVisibility()
       }
 
       function productLaunchTemplate() {
@@ -2775,7 +2922,7 @@ ${textInput.value || 'Seu próximo produto premium'}
 </div>
 
 `
-
+applyGlobalVisibility()
         restoreImage()
       }
 
@@ -2865,23 +3012,12 @@ ${textInput.value || 'Visual inspirado em posts virais de artistas.'}
 
 </div>
 
-<div style="
-display:flex;
-gap:25px;
-font-size:18px;
-">
-
-<div>❤️ 4.8M</div>
-
-<div>💬 284k</div>
-
-<div>🔁 93k</div>
-
-</div>
+${getUniversalStatsHTML('dark')}
 
 </div>
 
 `
+applyGlobalVisibility()
       }
 
       function carouselTemplate() {
@@ -2932,6 +3068,7 @@ ${textInput.value || 'Primeira página do carrossel'}
 </div>
 
 `
+applyGlobalVisibility()
       }
 
 function setTemplate(type) {
@@ -3009,18 +3146,11 @@ function setTemplate(type) {
 
       </div>
 
-      <div style="
-      display:flex;
-      gap:25px;
-      font-size:20px;
-      ">
-      <div>❤️ 2.8M</div>
-      <div>💬 140k</div>
-      <div>🚀 82k</div>
-      </div>
+      ${getUniversalStatsHTML('dark')}
 
       </div>
       `;
+      applyGlobalVisibility()
 
     break;
 
@@ -3091,6 +3221,7 @@ function setTemplate(type) {
 
       </div>
       `;
+      applyGlobalVisibility()
 
     break;
 
@@ -3171,7 +3302,7 @@ function setTemplate(type) {
 
       </div>
       `;
-
+applyGlobalVisibility()
     break;
 
     /* ==========================
@@ -3235,7 +3366,7 @@ function setTemplate(type) {
 
       </div>
       `;
-
+applyGlobalVisibility()
     break;
 
     /* ==========================
@@ -3306,7 +3437,7 @@ function setTemplate(type) {
 
       </div>
       `;
-
+applyGlobalVisibility()
     break;
 
     /* ==========================
@@ -3371,7 +3502,7 @@ function setTemplate(type) {
 
       </div>
       `;
-
+applyGlobalVisibility()
     break;
   }
 
@@ -3396,13 +3527,15 @@ function changeTextColor(color){
 }
 
 function toggleImage(){
-  const img = document.getElementById('postImage');
-  if(!img) return;
+
+  const img = getPostImage()
+
+  if(!img) return
 
   img.style.display =
     img.style.display === 'none'
       ? 'block'
-      : 'none';
+      : 'none'
 }
 
 function roundedPost(){
@@ -3432,8 +3565,306 @@ avatarInput.addEventListener('change', function () {
   }
 
   reader.readAsDataURL(file)
-
 })
+
+
+
+
+function toggleLikes(){
+
+  editorState.showLikes =
+    !editorState.showLikes;
+
+  renderTemplate();
+
+}
+
+function toggleComments(){
+
+  editorState.showComments =
+    !editorState.showComments;
+
+  renderTemplate();
+
+}
+
+function toggleShares(){
+
+  editorState.showShares =
+    !editorState.showShares;
+
+  renderTemplate();
+
+}
+
+
+function toggleTitle(){
+
+  editorState.showTitle =
+    !editorState.showTitle
+
+  renderTemplate()
+
+}
+
+function toggleUser(){
+
+  editorState.showUser =
+    !editorState.showUser
+
+  renderTemplate()
+
+}
+
+function toggleStats(){
+
+  editorState.showStats =
+    !editorState.showStats
+
+  renderTemplate()
+
+}
+
+function editLikes(){
+
+  const value = prompt(
+    'Novo número de likes:',
+    editorState.likes
+  )
+
+  if(value){
+
+    editorState.likes = value
+    renderTemplate()
+
+  }
+
+}
+
+function editComments(){
+
+  const value = prompt(
+    'Novo número de comentários:',
+    editorState.comments
+  )
+
+  if(value){
+
+    editorState.comments = value
+    renderTemplate()
+
+  }
+
+}
+
+function editShares(){
+
+  const value = prompt(
+    'Novo número de compartilhamentos:',
+    editorState.shares
+  )
+
+  if(value){
+
+    editorState.shares = value
+    renderTemplate()
+
+  }
+
+}
+
+function showIconsOnly(){
+
+  document.querySelectorAll(
+    '.post-stats div'
+  ).forEach(el => {
+
+    el.innerHTML =
+      el.innerHTML.replace(/[0-9A-Za-z]/g,'')
+
+  })
+
+}
+
+function addShadow(){
+
+  postCanvas.style.boxShadow =
+    '0 25px 60px rgba(0,0,0,.45)'
+
+}
+
+function removeShadow(){
+
+  postCanvas.style.boxShadow = 'none'
+
+}
+
+/* =======================================================
+   SISTEMA UNIVERSAL DE STATS
+======================================================= */
+
+function getUniversalStatsHTML(style = 'default') {
+
+  const color =
+    style === 'dark'
+      ? '#fff'
+      : style === 'light'
+      ? '#000'
+      : 'inherit'
+
+  return `
+
+  <div
+    class="post-stats"
+    style="
+
+      gap:24px;
+      margin-top:25px;
+      font-size:18px;
+      flex-wrap:wrap;
+      color:${color};
+    "
+  >
+
+    <div
+      class="stat-likes"
+      style="
+
+        align-items:center;
+        gap:8px;
+      "
+    >
+      ❤️ ${editorState.likes}
+    </div>
+
+    <div
+      class="stat-comments"
+      style="
+
+        align-items:center;
+        gap:8px;
+      "
+    >
+      💬 ${editorState.comments}
+    </div>
+
+    <div
+      class="stat-shares"
+      style="
+
+        align-items:center;
+        gap:8px;
+      "
+    >
+      🔁 ${editorState.shares}
+    </div>
+
+  </div>
+
+  `
+}
+
+/* =======================================================
+   APPLY VISIBILITY UNIVERSAL
+======================================================= */
+
+function applyGlobalVisibility() {
+
+  /* USER */
+
+  document
+    .querySelectorAll('.post-user')
+    .forEach(el => {
+
+      el.style.display =
+        editorState.showUser
+          ? 'flex'
+          : 'none'
+
+    })
+
+  /* TITLE */
+
+  document
+    .querySelectorAll('.post-title')
+    .forEach(el => {
+
+      el.style.display =
+        editorState.showTitle
+          ? 'block'
+          : 'none'
+
+    })
+
+  /* STATS */
+
+  document
+    .querySelectorAll('.post-stats')
+    .forEach(el => {
+
+      el.style.display =
+        editorState.showStats
+          ? 'flex'
+          : 'none'
+
+    })
+
+  /* LIKES */
+
+  document
+    .querySelectorAll('.stat-likes')
+    .forEach(el => {
+
+      el.style.display =
+        editorState.showLikes
+          ? 'flex'
+          : 'none'
+
+    })
+
+  /* COMMENTS */
+
+  document
+    .querySelectorAll('.stat-comments')
+    .forEach(el => {
+
+      el.style.display =
+        editorState.showComments
+          ? 'flex'
+          : 'none'
+
+    })
+
+  /* SHARES */
+
+  document
+    .querySelectorAll('.stat-shares')
+    .forEach(el => {
+
+      el.style.display =
+        editorState.showShares
+          ? 'flex'
+          : 'none'
+
+    })
+
+}
+
+/* =======================================================
+   RE-RENDER UNIVERSAL
+======================================================= */
+
+function refreshTemplate() {
+
+  renderTemplate()
+  applyGlobalVisibility()
+
+}
+
+window.onerror = function(msg,url,line){
+   console.log("ERRO:",msg)
+   console.log("LINHA:",line)
+}
 
     </script>
   </body>
