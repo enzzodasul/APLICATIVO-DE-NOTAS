@@ -99,31 +99,33 @@
         z-index: 0;
       }
 
-      .app {
-        position: relative;
+.app {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
 
-        z-index: 2;
+.sidebar {
+  width: 340px;
+  min-width: 340px;
+  height: 100vh;
 
-        display: flex;
+  background: rgba(15, 23, 41, 0.95);
 
-        height: 100vh;
+  backdrop-filter: blur(30px);
 
-        overflow: hidden;
-      }
+  border-right: 1px solid var(--border);
 
-      .sidebar {
-        width: 360px;
+  overflow-y: auto;
+  overflow-x: hidden;
 
-        background: rgba(15, 23, 41, 0.95);
+  padding: 24px;
 
-        backdrop-filter: blur(30px);
-
-        border-right: 1px solid var(--border);
-
-        overflow-y: auto;
-
-        padding: 24px;
-      }
+  flex-shrink: 0;
+}
 
       .logo {
         font-size: 34px;
@@ -495,17 +497,20 @@
         margin-bottom: 18px;
       }
 
-      .avatar {
-        width: 58px;
+     .avatar {
+  width: 58px;
+  height: 58px;
 
-        height: 58px;
+  border-radius: 50%;
 
-        border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
-        background: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255,255,255,.15);
 
-        backdrop-filter: blur(10px);
-      }
+  backdrop-filter: blur(10px);
+}
 
       .user-name {
         font-weight: 800;
@@ -555,25 +560,28 @@
         gap: 8px;
       }
       .library-panel {
-        position: absolute;
 
-        top: 20px;
-        right: 20px;
+  width: 320px;
 
-        width: 260px;
+  min-width: 320px;
 
-        background: rgba(15, 23, 41, 0.85);
+  height: 100vh;
 
-        backdrop-filter: blur(20px);
+  background: rgba(15, 23, 41, 0.95);
 
-        border: 1px solid var(--border);
+  backdrop-filter: blur(20px);
 
-        border-radius: 24px;
+  border-left: 1px solid var(--border);
 
-        padding: 18px;
+  overflow-y: auto;
 
-        z-index: 10;
-      }
+  overflow-x: hidden;
+
+  padding: 20px;
+
+  flex-shrink: 0;
+
+}
 
       .library-title {
         font-size: 12px;
@@ -851,7 +859,7 @@
         }
 
         .library-panel {
-          display: none;
+          display: block;
         }
       }
 
@@ -898,40 +906,107 @@
         </p>
 
         <div class="section">
-          <div class="section-title">Conteúdo</div>
 
-          <div class="input-group">
-            <label> Usuário </label>
+  <div class="section-title">Conteúdo</div>
 
-            <input id="userInput" class="input" placeholder="@notefy" />
-          </div>
+  <!-- USUÁRIO -->
+  <div class="input-group">
+    <label>Usuário</label>
 
-          <div class="input-group">
-            <label> Título </label>
+    <input
+      id="userInput"
+      class="input"
+      placeholder="@notefy"
+    />
+  </div>
 
-            <input
-              id="titleInput"
-              class="input"
-              placeholder="Digite um título"
-            />
-          </div>
+  <!-- TÍTULO -->
+  <div class="input-group">
+    <label>Título</label>
 
-          <div class="input-group">
-            <label> Texto </label>
+    <input
+      id="titleInput"
+      class="input"
+      placeholder="Digite um título"
+    />
+  </div>
 
-            <textarea
-              id="textInput"
-              class="input textarea"
-              placeholder="Digite sua mensagem"
-            ></textarea>
-          </div>
+  <!-- TEXTO -->
+  <div class="input-group">
+    <label>Texto</label>
 
-          <div class="input-group">
-            <label> Upload de imagem </label>
+    <textarea
+      id="textInput"
+      class="input textarea"
+      placeholder="Digite sua mensagem"
+    ></textarea>
+  </div>
 
-            <input type="file" id="imageInput" class="input" accept="image/*" />
-          </div>
-        </div>
+  <!-- UPLOAD IMAGEM -->
+  <label
+    for="imageInput"
+    style="
+    width:100%;
+    height:120px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:#151f36;
+    color:white;
+    border:2px dashed #5865f2;
+    border-radius:16px;
+    cursor:pointer;
+    font-weight:700;
+    "
+  >
+    <div>
+      <i class="fa-solid fa-image"
+      style="font-size:32px;color:#5865f2;"></i>
+
+      <br>
+
+      Clique para enviar uma imagem
+    </div>
+  </label>
+
+  <input
+    type="file"
+    id="imageInput"
+    accept="image/*"
+    hidden
+  />
+
+  <!-- FOTO PERFIL -->
+  <label
+    for="avatarInput"
+    style="
+    width:100%;
+    height:80px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:#151f36;
+    color:white;
+    border:2px dashed #5865f2;
+    border-radius:16px;
+    cursor:pointer;
+    font-weight:700;
+    margin-top:10px;
+    "
+  >
+    👤 Enviar Foto de Perfil
+  </label>
+
+  <input
+    type="file"
+    id="avatarInput"
+    accept="image/*"
+    hidden
+  />
+
+</div>
 
         <div class="section">
           <div class="section-title">Templates</div>
@@ -946,7 +1021,7 @@
             </div>
 
             <div class="template" onclick="setTemplate('blue')">
-              <div class="template-preview tp2">STORY</div>
+              <div class="template-preview tp2">BASIC</div>
 
               <div class="template-name">Story Neon</div>
             </div>
@@ -989,6 +1064,7 @@
               Compartilhar
             </button>
           </div>
+
         </div>
       </aside>
 
@@ -1049,24 +1125,103 @@
           </div>
         </div>
       </main>
-    </div>
+    
 
     <div class="library-panel">
-      <div class="library-title">Assets rápidos</div>
+      <div class="library-title">Personalização</div>
 
       <div class="asset-list">
-        <div class="asset asset1" onclick="setTemplate('purple')"></div>
 
-        <div class="asset asset2" onclick="setTemplate('blue')"></div>
+<div style="grid-column:1 / -1;">
+  <label style="display:block;margin-bottom:8px;">
+    🎨 Cor do Fundo
+  </label>
 
-        <div class="asset asset3" onclick="setTemplate('orange')"></div>
+  <input
+    type="color"
+    value="#5865f2"
+    onchange="changeBackgroundColor(this.value)"
+    style="
+      width:100%;
+      height:50px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+    "
+  >
+</div>
 
-        <div class="asset asset4" onclick="setTemplate('green')"></div>
+<div style="grid-column:1 / -1;">
+  <label style="display:block;margin-bottom:8px;">
+    🔤 Cor do Texto
+  </label>
 
-        <div class="asset asset5" onclick="setTemplate('black')"></div>
+  <input
+    type="color"
+    value="#ffffff"
+    onchange="changeTextColor(this.value)"
+    style="
+      width:100%;
+      height:50px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+    "
+  >
+</div>
 
-        <div class="asset asset6" onclick="setTemplate('pink')"></div>
-      </div>
+<button class="action-btn" onclick="toggleImage()">
+🖼️ Mostrar/Ocultar Imagem
+</button>
+
+<button class="action-btn" onclick="toggleTitle()">
+📌 Mostrar/Ocultar Título
+</button>
+
+<button class="action-btn" onclick="toggleUser()">
+👤 Mostrar/Ocultar Usuário
+</button>
+
+<button class="action-btn" onclick="toggleStats()">
+❤️ Mostrar/Ocultar Likes
+</button>
+
+<button class="action-btn" onclick="editLikes()">
+❤️ Editar Likes
+</button>
+
+<button class="action-btn" onclick="editComments()">
+💬 Editar Comentários
+</button>
+
+<button class="action-btn" onclick="editShares()">
+🔁 Editar Compartilhamentos
+</button>
+
+<button class="action-btn" onclick="showIconsOnly()">
+✨ Apenas Ícones
+</button>
+
+<button class="action-btn" onclick="addShadow()">
+🌑 Sombra
+</button>
+
+<button class="action-btn" onclick="removeShadow()">
+☀️ Sem Sombra
+</button>
+
+<button class="action-btn" onclick="roundedPost()">
+⭕ Bordas Arredondadas
+</button>
+
+<button class="action-btn" onclick="squarePost()">
+⬜ Bordas Retas
+</button>
+
+</div>
+
+
+
 
       <div class="quick-actions">
         <button class="action-btn" onclick="exportPNG()">PNG</button>
@@ -1074,12 +1229,16 @@
         <button class="action-btn" onclick="shareDesign()">Share</button>
       </div>
     </div>
+    </div>
 
     <button class="floating-save" onclick="saveProject()">
       <i class="fa-solid fa-floppy-disk"></i>
     </button>
 
     <script>
+     
+
+
       const titleInput = document.getElementById('titleInput')
 
       const textInput = document.getElementById('textInput')
@@ -1087,6 +1246,28 @@
       const userInput = document.getElementById('userInput')
 
       const imageInput = document.getElementById('imageInput')
+
+      const avatarInput = document.getElementById('avatarInput') 
+      let currentAvatarData = null
+
+      function restoreAvatar() {
+
+  if (!currentAvatarData) return
+
+  document
+    .querySelectorAll('.avatar')
+    .forEach(el => {
+
+      el.style.backgroundImage =
+        `url(${currentAvatarData})`
+
+      el.style.backgroundSize = 'cover'
+      el.style.backgroundPosition = 'center'
+      el.style.backgroundRepeat = 'no-repeat'
+
+    })
+
+}
 
       const previewTitle = document.getElementById('previewTitle')
 
@@ -1100,18 +1281,67 @@
 
       let currentFormat = 'instagram'
 
-      titleInput.addEventListener('input', () => {
-        previewTitle.innerHTML = titleInput.value || 'CREATOR MODE'
-      })
+      const editorState = {
 
-      textInput.addEventListener('input', () => {
-        previewText.innerHTML =
-          textInput.value || 'Crie posts incríveis para redes sociais'
-      })
+  username: '@notefy',
 
-      userInput.addEventListener('input', () => {
-        previewUser.innerHTML = userInput.value || '@notefy'
-      })
+  title: 'CREATOR MODE',
+
+  text: 'Crie posts incríveis para redes sociais.',
+
+  likes: '4.8M',
+
+  comments: '284K',
+
+  shares: '93K',
+
+  verified: true,
+
+  avatar: '',
+
+  backgroundImage: '',
+
+  template: 'instagram',
+
+  showAvatar: true,
+
+  showBackground: true,
+
+  showStats: true,
+
+  showTitle: true,
+
+  showUser: true
+
+}
+      titleInput.addEventListener('input', e => {
+
+  editorState.title =
+    e.target.value || 'CREATOR MODE'
+
+  renderTemplate()
+
+})
+
+textInput.addEventListener('input', e => {
+
+  editorState.text =
+    e.target.value ||
+    'Crie posts incríveis para redes sociais'
+
+  renderTemplate()
+
+})
+
+userInput.addEventListener('input', e => {
+
+  editorState.username =
+    e.target.value || '@notefy'
+
+  renderTemplate()
+
+})
+      
 
       imageInput.addEventListener('change', function () {
         const file = this.files[0]
@@ -1140,65 +1370,83 @@
           div.remove()
         }, 3000)
       }
+        
       function setFormat(type) {
-        currentFormat = type
 
-        const canvas = document.getElementById('postCanvas')
+  currentFormat = type
+  editorState.template = type
 
-        const buttons = document.querySelectorAll('.format-btn')
+  const canvas = document.getElementById('postCanvas')
 
-        buttons.forEach((btn) => {
-          btn.classList.remove('format-active')
-        })
+  const buttons =
+    document.querySelectorAll('.format-btn')
 
-        if (type === 'instagram') {
-          buttons[0]?.classList.add('format-active')
+  buttons.forEach((btn) => {
+    btn.classList.remove('format-active')
+  })
 
-          canvas.style.aspectRatio = '1 / 1'
+  if (type === 'instagram') {
 
-          canvas.style.maxWidth = '650px'
+    buttons[0]?.classList.add('format-active')
 
-          canvas.style.width = '100%'
+    canvas.style.aspectRatio = '1 / 1'
+    canvas.style.maxWidth = '650px'
+    canvas.style.width = '100%'
 
-          toast('Modo Instagram')
-        }
+    renderInstagramMode()
 
-        if (type === 'story') {
-          buttons[1]?.classList.add('format-active')
+    toast('Modo Instagram')
+  }
 
-          canvas.style.aspectRatio = '9 / 16'
+  if (type === 'story') {
 
-          canvas.style.maxWidth = '420px'
+    buttons[1]?.classList.add('format-active')
 
-          canvas.style.width = '100%'
+    canvas.style.aspectRatio = '9 / 16'
+    canvas.style.maxWidth = '420px'
+    canvas.style.width = '100%'
 
-          toast('Modo Story')
-        }
+    renderStoryMode()
 
-        if (type === 'youtube') {
-          buttons[2]?.classList.add('format-active')
+    toast('Modo Story')
+  }
 
-          canvas.style.aspectRatio = '16 / 9'
+  if (type === 'youtube') {
 
-          canvas.style.maxWidth = '1000px'
+    buttons[2]?.classList.add('format-active')
 
-          canvas.style.width = '100%'
+    canvas.style.aspectRatio = '16 / 9'
+    canvas.style.maxWidth = '1000px'
+    canvas.style.width = '100%'
 
-          toast('Modo YouTube')
-        }
+    renderYoutubeMode()
 
-        if (type === 'tweet') {
-          canvas.style.aspectRatio = '16 / 10'
+    toast('Modo YouTube')
+  }
 
-          canvas.style.maxWidth = '850px'
+  if (type === 'tweet') {
 
-          canvas.style.width = '100%'
+    canvas.style.aspectRatio = '16 / 10'
+    canvas.style.maxWidth = '850px'
+    canvas.style.width = '100%'
 
-          canvas.style.background = '#000000'
+    renderTweetMode()
 
-          toast('Modo Tweet/X')
-        }
-      }
+    toast('Modo Tweet/X')
+  }
+
+  if (type === 'threads') {
+
+    canvas.style.aspectRatio = '1 / 1'
+    canvas.style.maxWidth = '650px'
+    canvas.style.width = '100%'
+
+    renderThreadsMode()
+
+    toast('Modo Threads')
+  }
+
+}
 
       document.addEventListener('DOMContentLoaded', () => {
         const formatButtons = document.querySelectorAll('.format-btn')
@@ -1216,7 +1464,8 @@
         }
       })
       function renderTweetMode() {
-        postCanvas.innerHTML = `
+
+  postCanvas.innerHTML = `
 
 <div style="
 height:100%;
@@ -1234,14 +1483,21 @@ display:flex;
 align-items:center;
 gap:14px;
 margin-bottom:20px;
+display:${editorState.showUser ? 'flex' : 'none'};
 ">
 
-<div style="
+<div
+class="avatar"
+style="
 width:60px;
 height:60px;
 border-radius:50%;
-background:#1d9bf0;
-"></div>
+background-image:url(${currentAvatarData || ''});
+background-size:cover;
+background-position:center;
+display:${editorState.showAvatar ? 'block' : 'none'};
+">
+</div>
 
 <div>
 
@@ -1250,10 +1506,14 @@ font-weight:800;
 font-size:18px;
 ">
 
-${previewUser.innerHTML}
+${editorState.username}
 
-<i class="fa-solid fa-circle-check"
-style="color:#1d9bf0"></i>
+${
+  editorState.verified
+    ? `<i class="fa-solid fa-circle-check"
+style="color:#1d9bf0"></i>`
+    : ''
+}
 
 </div>
 
@@ -1262,7 +1522,7 @@ opacity:.7;
 font-size:14px;
 ">
 
-${previewUser.innerHTML}
+${editorState.username}
 
 </div>
 
@@ -1276,7 +1536,7 @@ line-height:1.6;
 font-weight:500;
 ">
 
-${previewText.innerHTML}
+${editorState.text}
 
 </div>
 
@@ -1294,24 +1554,24 @@ margin-bottom:18px;
 </div>
 
 <div style="
-display:flex;
+display:${editorState.showStats ? 'flex' : 'none'};
 gap:28px;
 font-size:18px;
 ">
 
 <div>
 <i class="fa-regular fa-comment"></i>
-42 mil
+${editorState.comments}
 </div>
 
 <div>
 <i class="fa-solid fa-retweet"></i>
-18 mil
+${editorState.shares}
 </div>
 
 <div>
 <i class="fa-regular fa-heart"></i>
-1,2 mi
+${editorState.likes}
 </div>
 
 <div>
@@ -1325,30 +1585,49 @@ font-size:18px;
 </div>
 
 `
-      }
 
-      function renderInstagramMode() {
-        postCanvas.innerHTML = `
+}
+
+     function renderInstagramMode() {
+
+  postCanvas.innerHTML = `
 
 <div
 class="post-image"
-id="postImage"></div>
+style="
+background-image:url(${editorState.backgroundImage});
+display:${editorState.showBackground ? 'block' : 'none'};
+background-size:cover;
+background-position:center;
+">
+</div>
 
 <div class="post-overlay"></div>
 
 <div class="post-content">
 
-<div class="profile">
+<div
+class="profile"
+style="
+display:${editorState.showUser ? 'flex' : 'none'};
+">
 
-<div class="avatar"></div>
+<div
+class="avatar"
+style="
+display:${editorState.showAvatar ? 'block' : 'block'};
+background-image:url(${currentAvatarData || ''});
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+">
+</div>
 
 <div>
 
-<div
-class="user-name"
-id="previewUser">
+<div class="user-name">
 
-${userInput.value || '@notefy'}
+${editorState.username}
 
 </div>
 
@@ -1364,32 +1643,36 @@ creator premium
 
 <div
 class="post-title"
-id="previewTitle">
+style="
+display:${editorState.showTitle ? 'block' : 'none'};
+">
 
-${titleInput.value || 'CREATOR MODE'}
+${editorState.title}
+
+</div>
+
+<div class="post-text">
+
+${editorState.text}
 
 </div>
 
 <div
-class="post-text"
-id="previewText">
-
-${textInput.value || 'Crie posts incríveis para redes sociais'}
-
-</div>
-
-<div class="post-stats">
+class="post-stats"
+style="
+display:${editorState.showStats ? 'flex' : 'none'};
+">
 
 <div>
-❤️ 4.8M
+❤️ ${editorState.likes}
 </div>
 
 <div>
-💬 284k
+💬 ${editorState.comments}
 </div>
 
 <div>
-🔁 93k
+🔁 ${editorState.shares}
 </div>
 
 </div>
@@ -1397,14 +1680,60 @@ ${textInput.value || 'Crie posts incríveis para redes sociais'}
 </div>
 
 `
-      }
+
+}
+
+function renderTemplate() {
+
+  if (editorState.template === 'instagram') {
+
+    renderInstagramMode()
+
+  }
+
+  if (editorState.template === 'story') {
+
+    renderStoryMode()
+
+  }
+
+  if (editorState.template === 'youtube') {
+
+    renderYoutubeMode()
+
+  }
+
+  if (editorState.template === 'tweet') {
+
+    renderTweetMode()
+
+  }
+
+  if (editorState.template === 'threads') {
+
+    renderThreadsMode()
+
+  }
+
+}
+
+
+
+
 
       function renderStoryMode() {
-        postCanvas.innerHTML = `
+
+  postCanvas.innerHTML = `
 
 <div
 class="post-image"
-id="postImage"></div>
+style="
+background-image:url(${editorState.backgroundImage});
+background-size:cover;
+background-position:center;
+display:${editorState.showBackground ? 'block' : 'none'};
+">
+</div>
 
 <div style="
 position:absolute;
@@ -1439,16 +1768,18 @@ z-index:4;
 ">
 
 <div style="
+display:${editorState.showUser ? 'block' : 'none'};
 font-size:18px;
 font-weight:700;
 margin-bottom:20px;
 ">
 
-${userInput.value || '@notefy'}
+${editorState.username}
 
 </div>
 
 <div style="
+display:${editorState.showTitle ? 'block' : 'none'};
 font-size:52px;
 font-weight:900;
 line-height:.95;
@@ -1456,16 +1787,16 @@ margin-bottom:18px;
 text-transform:uppercase;
 ">
 
-${titleInput.value || 'STORY'}
+${editorState.title}
 
 </div>
 
 <div style="
-font-size:18px;
-line-height:1.6;
+font-size:22px;
+line-height:1.5;
 ">
 
-${textInput.value || 'Story profissional'}
+${editorState.text}
 
 </div>
 
@@ -1473,8 +1804,7 @@ ${textInput.value || 'Story profissional'}
 
 `
 
-        restoreImage()
-      }
+}
 
       function renderYoutubeMode() {
         postCanvas.innerHTML = `
@@ -1576,31 +1906,7 @@ z-index:5;
         reader.readAsDataURL(file)
       })
 
-      function switchMode(type) {
-        if (type === 'instagram') {
-          renderInstagramMode()
-
-          setFormat('instagram')
-        }
-
-        if (type === 'story') {
-          renderStoryMode()
-
-          setFormat('story')
-        }
-
-        if (type === 'youtube') {
-          renderYoutubeMode()
-
-          setFormat('youtube')
-        }
-
-        if (type === 'tweet') {
-          renderTweetMode()
-
-          setFormat('tweet')
-        }
-      }
+      
 
       function createAdvancedModes() {
         const selector = document.querySelector('.format-selector')
@@ -1611,7 +1917,7 @@ z-index:5;
 
 <button
 class="format-btn format-active"
-onclick="switchMode('instagram')">
+onclick="setFormat('instagram')">
 
 Instagram
 
@@ -1619,7 +1925,7 @@ Instagram
 
 <button
 class="format-btn"
-onclick="switchMode('story')">
+onclick="setFormat('story')">
 
 Story
 
@@ -1627,7 +1933,7 @@ Story
 
 <button
 class="format-btn"
-onclick="switchMode('youtube')">
+onclick="setFormat('youtube')">
 
 YouTube
 
@@ -1635,7 +1941,7 @@ YouTube
 
 <button
 class="format-btn"
-onclick="switchMode('tweet')">
+onclick="setFormat('tweet')">
 
 Tweet
 
@@ -1643,7 +1949,7 @@ Tweet
 
 <button
 class="format-btn"
-onclick="switchMode('threads')">
+onclick="setFormat('threads')">
 
 Threads
 
@@ -1671,12 +1977,18 @@ gap:14px;
 margin-bottom:22px;
 ">
 
-<div style="
+<div
+class="avatar"
+style="
 width:60px;
 height:60px;
 border-radius:50%;
-background:#111;
-"></div>
+background-image:url(${currentAvatarData || ''});
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+">
+</div>
 
 <div>
 
@@ -1732,24 +2044,12 @@ border-top:1px solid rgba(0,0,0,.08);
 `
       }
 
-      const oldSwitchMode = switchMode
-
-      switchMode = function (type) {
-        if (type === 'threads') {
-          renderThreadsMode()
-
-          toast('Modo Threads')
-
-          return
-        }
-
-        oldSwitchMode(type)
-      }
+      
 
       document.addEventListener('DOMContentLoaded', () => {
         createAdvancedModes()
 
-        renderInstagramMode()
+        renderTemplate()
 
         setFormat('instagram')
       })
@@ -1777,12 +2077,18 @@ gap:14px;
 margin-bottom:22px;
 ">
 
-<div style="
+<div
+class="avatar"
+style="
 width:62px;
 height:62px;
 border-radius:50%;
-background:#1d9bf0;
-"></div>
+background-image:url(${currentAvatarData || ''});
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+">
+</div>
 
 <div>
 
@@ -1875,12 +2181,18 @@ gap:14px;
 margin-bottom:22px;
 ">
 
-<div style="
+<div
+class="avatar"
+style="
 width:62px;
 height:62px;
 border-radius:50%;
-background:#1d9bf0;
-"></div>
+background-image:url(${currentAvatarData || ''});
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+">
+</div>
 
 <div>
 
@@ -1916,27 +2228,27 @@ ${textInput.value || 'Posts estilo tweet continuam convertendo muito.'}
 
 </div>
 
+<div>
+
 <div style="
-display:flex;
-gap:24px;
-padding-top:20px;
-border-top:1px solid #ddd;
+opacity:.6;
+margin-bottom:15px;
 ">
 
-<select id="selectlikes" >
-<li>
-<div>❤️ 842k</div>
-<div>💬 44k</div>
-<div>🔁 17k</div>
-</li>
+8:41 PM · Today
 
-<li>
-<div>❤️ </div>
-<div>💬 </div>
-<div>🔁 </div>
-</li>
+</div>
 
-</select>
+<div style="
+display:flex;
+gap:30px;
+">
+
+<div>💬 12k</div>
+<div>🔁 5k</div>
+<div>❤️ 489k</div>
+
+</div>
 
 </div>
 
@@ -2007,12 +2319,18 @@ gap:15px;
 margin-bottom:25px;
 ">
 
-<div style="
+<div
+class="avatar"
+style="
 width:60px;
 height:60px;
 border-radius:50%;
-background:#0a66c2;
-"></div>
+background-image:url(${currentAvatarData || ''});
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+">
+</div>
 
 <div>
 
@@ -2483,12 +2801,18 @@ gap:15px;
 margin-bottom:25px;
 ">
 
-<div style="
+<div
+class="avatar"
+style="
 width:70px;
 height:70px;
 border-radius:50%;
-background:linear-gradient(135deg,#60a5fa,#2563eb);
-"></div>
+background-image:url(${currentAvatarData || ''});
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+">
+</div>
 
 <div>
 
@@ -2609,6 +2933,508 @@ ${textInput.value || 'Primeira página do carrossel'}
 
 `
       }
+
+function setTemplate(type) {
+
+  switch(type) {
+
+    /* ==========================
+       PURPLE VIRAL
+    ========================== */
+
+    case 'purple':
+
+      postCanvas.style.background =
+      'linear-gradient(135deg,#6d28d9,#4338ca,#2563eb)';
+
+      postCanvas.innerHTML = `
+
+      <div style="
+      height:100%;
+      padding:50px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      ">
+
+      <div style="
+      display:flex;
+      align-items:center;
+      gap:15px;
+      ">
+
+      <div
+      class="avatar"
+      style="
+      width:70px;
+      height:70px;
+      border-radius:50%;
+      background-image:url(${currentAvatarData || ''});
+      background-size:cover;
+      background-position:center;
+      ">
+      </div>
+
+      <div>
+      <div style="font-size:20px;font-weight:800;">
+      ${userInput.value || '@notefy'}
+      </div>
+
+      <div style="opacity:.7;">
+      Creator
+      </div>
+      </div>
+
+      </div>
+
+      <div>
+
+      <div style="
+      font-size:72px;
+      font-weight:900;
+      line-height:.9;
+      text-transform:uppercase;
+      ">
+      ${titleInput.value || 'TÍTULO VIRAL'}
+      </div>
+
+      <div style="
+      margin-top:25px;
+      font-size:24px;
+      line-height:1.5;
+      opacity:.95;
+      ">
+      ${textInput.value || 'Descrição do conteúdo'}
+      </div>
+
+      </div>
+
+      <div style="
+      display:flex;
+      gap:25px;
+      font-size:20px;
+      ">
+      <div>❤️ 2.8M</div>
+      <div>💬 140k</div>
+      <div>🚀 82k</div>
+      </div>
+
+      </div>
+      `;
+
+    break;
+
+    /* ==========================
+       STORY NEON
+    ========================== */
+
+    case 'blue':
+
+      postCanvas.style.background =
+      'linear-gradient(180deg,#06b6d4,#2563eb)';
+
+      postCanvas.innerHTML = `
+
+      <div style="
+      height:100%;
+      padding:35px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      ">
+
+      <div style="
+      display:flex;
+      align-items:center;
+      gap:15px;
+      ">
+
+      <div
+      class="avatar"
+      style="
+      width:65px;
+      height:65px;
+      border-radius:50%;
+      background-image:url(${currentAvatarData || ''});
+      background-size:cover;
+      background-position:center;
+      ">
+      </div>
+
+      <div>
+      <div style="font-size:20px;font-weight:800;">
+      ${userInput.value || '@notefy'}
+      </div>
+      </div>
+
+      </div>
+
+      <div>
+
+      <div style="
+      font-size:90px;
+      font-weight:900;
+      line-height:.85;
+      text-transform:uppercase;
+      ">
+      ${titleInput.value || 'BASIC'}
+      </div>
+
+      <div style="
+      margin-top:20px;
+      font-size:24px;
+      ">
+      ${textInput.value || 'Seu conteúdo'}
+      </div>
+
+      </div>
+
+      </div>
+      `;
+
+    break;
+
+    /* ==========================
+       CREATOR ORANGE
+    ========================== */
+
+    case 'orange':
+
+      postCanvas.style.background =
+      'linear-gradient(135deg,#f97316,#ea580c)';
+
+      postCanvas.innerHTML = `
+
+      <div style="
+      height:100%;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      ">
+
+      <div style="
+      background:#fff;
+      color:#111;
+      padding:40px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      ">
+
+      <div
+      class="avatar"
+      style="
+      width:70px;
+      height:70px;
+      border-radius:50%;
+      margin-bottom:20px;
+      background-image:url(${currentAvatarData || ''});
+      background-size:cover;
+      background-position:center;
+      ">
+      </div>
+
+      <div style="
+      font-size:16px;
+      font-weight:700;
+      color:#ea580c;
+      ">
+      ${userInput.value || '@notefy'}
+      </div>
+
+      <div style="
+      font-size:58px;
+      font-weight:900;
+      line-height:.95;
+      margin-top:15px;
+      ">
+      ${titleInput.value || 'CREATOR'}
+      </div>
+
+      <div style="
+      margin-top:20px;
+      font-size:20px;
+      ">
+      ${textInput.value || 'Descrição'}
+      </div>
+
+      </div>
+
+      <div style="
+      background:#111827;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:120px;
+      ">
+      🎥
+      </div>
+
+      </div>
+      `;
+
+    break;
+
+    /* ==========================
+       LUXURY
+    ========================== */
+
+    case 'black':
+
+      postCanvas.style.background =
+      'linear-gradient(135deg,#000,#111,#222)';
+
+      postCanvas.innerHTML = `
+
+      <div style="
+      height:100%;
+      padding:50px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      ">
+
+      <div
+      class="avatar"
+      style="
+      width:80px;
+      height:80px;
+      border-radius:50%;
+      margin-bottom:25px;
+      border:3px solid gold;
+      background-image:url(${currentAvatarData || ''});
+      background-size:cover;
+      background-position:center;
+      ">
+      </div>
+
+      <div style="
+      color:#d4af37;
+      letter-spacing:6px;
+      font-size:14px;
+      margin-bottom:20px;
+      ">
+      ${userInput.value || '@notefy'}
+      </div>
+
+      <div style="
+      font-size:82px;
+      font-weight:900;
+      line-height:.9;
+      color:white;
+      ">
+      ${titleInput.value || 'LUXURY'}
+      </div>
+
+      <div style="
+      margin-top:25px;
+      color:#d4af37;
+      font-size:24px;
+      ">
+      ${textInput.value || 'Produto Premium'}
+      </div>
+
+      </div>
+      `;
+
+    break;
+
+    /* ==========================
+       FITNESS
+    ========================== */
+
+    case 'green':
+
+      postCanvas.style.background =
+      'linear-gradient(135deg,#16a34a,#15803d)';
+
+      postCanvas.innerHTML = `
+
+      <div style="
+      height:100%;
+      padding:40px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      ">
+
+      <div style="
+      display:flex;
+      align-items:center;
+      gap:15px;
+      ">
+
+      <div
+      class="avatar"
+      style="
+      width:70px;
+      height:70px;
+      border-radius:50%;
+      background-image:url(${currentAvatarData || ''});
+      background-size:cover;
+      background-position:center;
+      ">
+      </div>
+
+      <div>
+      <div style="font-size:22px;font-weight:900;">
+      ${userInput.value || '@notefy'}
+      </div>
+
+      <div>FITNESS PRO</div>
+      </div>
+
+      </div>
+
+      <div>
+
+      <div style="
+      font-size:76px;
+      font-weight:900;
+      line-height:.9;
+      ">
+      ${titleInput.value || 'TREINO'}
+      </div>
+
+      <div style="
+      margin-top:20px;
+      font-size:24px;
+      ">
+      ${textInput.value || 'Transforme seu corpo'}
+      </div>
+
+      </div>
+
+      </div>
+      `;
+
+    break;
+
+    /* ==========================
+       FASHION
+    ========================== */
+
+    case 'pink':
+
+      postCanvas.style.background =
+      'linear-gradient(135deg,#ec4899,#f472b6,#fbcfe8)';
+
+      postCanvas.innerHTML = `
+
+      <div style="
+      height:100%;
+      padding:50px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      color:white;
+      ">
+
+      <div
+      class="avatar"
+      style="
+      width:90px;
+      height:90px;
+      border-radius:50%;
+      margin-bottom:25px;
+      border:4px solid white;
+      background-image:url(${currentAvatarData || ''});
+      background-size:cover;
+      background-position:center;
+      ">
+      </div>
+
+      <div style="
+      letter-spacing:10px;
+      font-size:18px;
+      margin-bottom:20px;
+      ">
+      ${userInput.value || '@notefy'}
+      </div>
+
+      <div style="
+      font-size:92px;
+      font-weight:900;
+      line-height:.85;
+      text-transform:uppercase;
+      ">
+      ${titleInput.value || 'STYLE'}
+      </div>
+
+      <div style="
+      margin-top:25px;
+      font-size:24px;
+      ">
+      ${textInput.value || 'Coleção exclusiva'}
+      </div>
+
+      </div>
+      `;
+
+    break;
+  }
+
+}
+      
+
+
+/* NOVAS FUNÇÕES */
+
+function changeBackgroundColor(color){
+  postCanvas.style.background = color;
+}
+
+function changeTextColor(color){
+
+  document.querySelectorAll(
+    '.post-title, .post-text, .user-name, .user-role'
+  ).forEach((el) => {
+    el.style.color = color;
+  });
+
+}
+
+function toggleImage(){
+  const img = document.getElementById('postImage');
+  if(!img) return;
+
+  img.style.display =
+    img.style.display === 'none'
+      ? 'block'
+      : 'none';
+}
+
+function roundedPost(){
+  postCanvas.style.borderRadius = '40px';
+}
+
+function squarePost(){
+  postCanvas.style.borderRadius = '0';
+}
+
+avatarInput.addEventListener('change', function () {
+
+  const file = this.files[0]
+
+  if (!file) return
+
+  const reader = new FileReader()
+
+  reader.onload = function (e) {
+
+    currentAvatarData = e.target.result
+
+    editorState.avatar = e.target.result
+
+    renderTemplate()
+
+  }
+
+  reader.readAsDataURL(file)
+
+})
+
     </script>
   </body>
 </html>

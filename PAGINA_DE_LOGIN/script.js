@@ -210,3 +210,14 @@ function obterUsuario() {
     email: localStorage.getItem('notefy_email') || '',
   }
 }
+
+function toggleLikes() {
+  const area = document.getElementById('likesArea');
+
+  if (!area) return;
+
+  area.style.display =
+    document.getElementById('mostrarLikes').checked
+      ? 'flex'
+      : 'none';
+}
