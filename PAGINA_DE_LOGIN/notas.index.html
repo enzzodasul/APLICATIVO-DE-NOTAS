@@ -100,6 +100,8 @@
         z-index: 0;
       }
 
+      
+
 .app {
   position: relative;
   z-index: 2;
@@ -332,28 +334,19 @@
         font-weight: 700;
       }
 
-      .workspace {
-        flex:1;
-  overflow:auto;
-      }
+     
 
-      .topbar {
-        height: 78px;
+      .topbar{
+position:relative;
+padding-left:70px;
+display:flex;
+align-items:center;
+gap:12px;
+padding-top:10px;
 
-        border-bottom: 1px solid var(--border);
 
-        display: flex;
+}
 
-        align-items: center;
-
-        justify-content: space-between;
-
-        padding: 0 25px;
-
-        background: rgba(5, 8, 22, 0.65);
-
-        backdrop-filter: blur(25px);
-      }
 
       .topbar-left {
         display: flex;
@@ -615,31 +608,68 @@
         background: linear-gradient(135deg, #ff0080, #ff4d4d);
       }
 
-      .quick-actions {
-        display: grid;
+  
 
-        grid-template-columns: 1fr 1fr;
+.action-btn::before{
 
-        gap: 10px;
+content:"";
 
-        margin-top: 18px;
-      }
+position:absolute;
 
-      .action-btn {
-        border: none;
+top:-30px;
+left:-50%;
 
-        cursor: pointer;
+width:200%;
+height:80px;
 
-        padding: 12px;
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.18),
+transparent
+);
 
-        border-radius: 14px;
+transform:rotate(25deg);
 
-        font-weight: 700;
+transition:.6s;
 
-        background: var(--card2);
+}
 
-        color: white;
-      }
+.action-btn:hover::before{
+left:120%;
+}
+
+.action-btn:hover{
+
+transform:
+translateY(-4px);
+
+border-color:#7c3aed;
+
+box-shadow:
+0 0 25px rgba(124,58,237,.45);
+
+}
+
+
+
+.action-btn i{
+
+font-size:22px;
+
+padding:12px;
+
+border-radius:50%;
+
+background:
+rgba(255,255,255,.10);
+
+backdrop-filter:blur(10px);
+
+box-shadow:
+inset 0 0 12px rgba(255,255,255,.15);
+}
 
       .projects {
         margin-top: 25px;
@@ -811,241 +841,403 @@
         }
       }
 
-    /* LAYOUT PRINCIPAL */
-.app{
-    position:relative;
-    z-index:2;
-
-    display:grid;
-    grid-template-columns:340px 1fr 320px;
-
-    width:100%;
-    min-height:100vh;
-
-    overflow:hidden;
-}
-
-/* ESQUERDA */
-.sidebar{
-    height:100vh;
-
-    position:sticky;
-    top:0;
-
-    overflow-y:auto;
-
-    background:rgba(15,23,41,.95);
-
-    backdrop-filter:blur(30px);
-
-    border-right:1px solid var(--border);
-}
-
-/* CENTRO */
-.workspace{
-    min-width:0;
-
-    height:100vh;
-
-    overflow-y:auto;
-}
-
-/* DIREITA */
-.library-panel{
-    height:100vh;
-
-    position:sticky;
-    top:0;
-
-    overflow-y:auto;
-
-    padding:22px;
-
-    background:rgba(10,16,32,.95);
-
-    backdrop-filter:blur(25px);
-
-    border-left:1px solid rgba(255,255,255,.06);
-
-    box-shadow:-15px 0 50px rgba(0,0,0,.35);
-
-    z-index:99;
-}
-/* RESPONSIVO */
-@media(max-width:1200px){
+    /* =========================
+LAYOUT BASE
+========================= */
 
 .app{
-grid-template-columns:
-300px
-1fr;
-}
-
-.library-panel{
-display:none;
-}
-
-}
-
-@media (max-width:900px){
-
-/* app vira coluna */
-.app{
-display:flex;
-flex-direction:column;
-width:100%;
-min-height:100vh;
-overflow-x:hidden;
-}
-
-/* editor topo */
-.sidebar{
-position:relative;
-width:100%;
-min-width:100%;
-height:auto;
-
-padding:18px;
-
-border-right:none;
-border-bottom:1px solid var(--border);
-
-overflow:visible;
-}
-
-/* preview ocupa centro */
-.workspace{
-width:100%;
-height:auto;
-
-overflow:visible;
-
-padding-bottom:220px;
-}
-
-/* remove altura travada */
-.preview-area{
-padding:15px;
-display:flex;
-justify-content:center;
-align-items:flex-start;
-}
-
-/* preview grande no celular */
-.canvas-container{
-width:100%;
-max-width:100%;
-}
-
-.post-canvas{
-
-width:100%;
-
-max-width:500px;
-
-margin:auto;
-
-border-radius:24px;
-}
-
-/* painel inferior acessível */
-.library-panel{
-
-display:block;
-
-position:fixed;
-
-bottom:0;
-left:0;
-right:0;
-
-height:180px;
-
-padding:14px;
-
-z-index:99999;
-
-background:rgba(8,12,22,.98);
-
-backdrop-filter:blur(35px);
-
-border-top:1px solid rgba(255,255,255,.08);
-
+display:grid;
+grid-template-columns:340px 1fr 320px;
+height:100dvh;
 overflow:hidden;
 }
 
-/* ações deslizam horizontal */
-.quick-actions{
-
-display:flex;
-
-gap:12px;
-
-overflow-x:auto;
-
-overflow-y:hidden;
-
-padding-bottom:8px;
-
-scroll-snap-type:x mandatory;
+.sidebar{
+overflow-y:auto;
+height:100dvh;
 }
 
-.quick-actions::-webkit-scrollbar{
+
+
+.library-panel{
+overflow-y:auto;
+height:100dvh;
+}
+
+
+/* =========================
+TABLET
+========================= */
+
+@media (max-width:1200px){
+
+.app{
+grid-template-columns:300px 1fr;
+}
+
+.library-panel{
 display:none;
 }
 
-.action-btn{
-
-flex:none;
-
-min-width:150px;
-
-height:58px;
-
-scroll-snap-align:start;
-
-font-size:14px;
 }
 
-/* mantém cores visíveis */
-.asset-list{
 
-display:flex;
 
-gap:12px;
+/* ================= MOBILE REAL ================= */
+
+@media(max-width:900px){
+
+html,body{
+margin:0;
+height:100%;
+overflow:hidden;
+}
+
+.app{
+display:block;
+height:100vh;
+position:relative;
+overflow:hidden;
+}
+
+/* preview ocupa quase tela toda */
+
+.workspace{
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:82px;
 
 overflow:auto;
 
-margin-bottom:12px;
+padding:20px 12px 120px;
+
+z-index:1;
 }
 
-.asset-list div{
-min-width:230px;
+
+/* sidebar lateral */
+
+.sidebar{
+
+position:fixed;
+
+top:0;
+left:-100%;
+
+width:85%;
+max-width:340px;
+
+height:100vh;
+
+background:#081120;
+
+z-index:999999;
+
+transition:.35s;
+
+overflow-y:auto;
+
+padding:20px;
+
+box-shadow:
+20px 0 60px rgba(0,0,0,.6);
+
 }
 
-/* topbar organizada */
-.topbar{
+.sidebar.open{
+left:0;
+}
 
-height:auto;
+
+/* painel inferior */
+
+.library-panel{
+
+position:fixed;
+
+left:0;
+right:0;
+bottom:0;
+
+height:82px;
+
+background:
+linear-gradient(
+180deg,
+rgba(9,14,35,.98),
+rgba(4,7,20,.99)
+);
+
+backdrop-filter:blur(50px);
+
+border-radius:30px 30px 0 0;
 
 padding:14px;
 
-gap:12px;
+overflow:hidden;
 
-flex-wrap:wrap;
+transition:.35s;
+
+z-index:99999;
+
+box-shadow:
+0 -15px 50px rgba(0,0,0,.65);
+
 }
 
-/* botão flutuante sobe */
+
+/* aberto */
+
+.library-panel.expanded{
+
+height:55vh;
+
+overflow-y:auto;
+
+padding-top:35px;
+
+}
+
+
+/* barra arrastar */
+
+.editor-toggle{
+
+position:absolute;
+
+top:10px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+width:70px;
+
+height:7px;
+
+border:none;
+
+border-radius:999px;
+
+background:#5865f2;
+
+cursor:pointer;
+
+}
+
+
+/* titulo */
+
+.library-title{
+
+margin-top:20px;
+
+text-align:center;
+
+font-size:12px;
+
+letter-spacing:2px;
+
+opacity:.8;
+
+}
+
+
+/* botões */
+
+.quick-actions{
+
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:10px;
+
+margin-top:15px;
+
+padding-bottom:20px;
+
+}
+
+
+.action-btn{
+
+height:72px;
+
+border-radius:20px;
+
+font-size:10px;
+
+min-width:auto;
+
+padding:8px;
+
+}
+
+
+.action-btn i{
+
+font-size:18px;
+
+width:34px;
+height:34px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+border-radius:12px;
+
+}
+
+
+/* botão menu */
+
+.mobile-menu{
+
+display:flex;
+
+position:fixed;
+
+top:16px;
+left:16px;
+
+width:48px;
+height:48px;
+
+border:none;
+
+border-radius:14px;
+
+z-index:9999999;
+
+background:
+rgba(88,101,242,.25);
+
+backdrop-filter:blur(20px);
+
+color:#fff;
+
+font-size:22px;
+
+}
+
+
 .floating-save{
 
-bottom:210px;
-right:15px;
+bottom:100px;
+
 }
 
 }
+
+/* ================= FIX PREVIEW MOBILE ================= */
+
+@media(max-width:900px){
+
+.preview-area{
+display:flex;
+align-items:center;
+justify-content:center;
+
+height:100%;
+
+padding:10px;
+overflow:auto;
+}
+
+.canvas-container{
+
+width:100%;
+
+display:flex;
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+}
+
+/* MÁGICA AQUI */
+
+.post-canvas{
+
+width:min(92vw,420px)!important;
+
+max-width:92vw!important;
+
+height:auto!important;
+
+margin:auto;
+
+transform-origin:center center;
+
+overflow:hidden;
+
+}
+
+/* mantém proporção sem zoom */
+
+.post-canvas *{
+
+max-width:100%;
+
+box-sizing:border-box;
+
+}
+
+/* títulos gigantes reduzem no celular */
+
+.post-title{
+font-size:clamp(28px,7vw,56px)!important;
+line-height:1!important;
+}
+
+.user-name{
+font-size:clamp(14px,3vw,20px)!important;
+}
+
+.post-text{
+font-size:clamp(14px,4vw,24px)!important;
+}
+
+/* templates internos enormes */
+
+.post-canvas div[style*="font-size:90px"],
+.post-canvas div[style*="font-size:92px"],
+.post-canvas div[style*="font-size:88px"],
+.post-canvas div[style*="font-size:82px"],
+.post-canvas div[style*="font-size:76px"],
+.post-canvas div[style*="font-size:72px"]{
+
+font-size:clamp(
+32px,
+9vw,
+72px
+)!important;
+
+line-height:.95!important;
+
+}
+
+}
+
+
+
     </style>
   </head>
 
   <body>
+
+    <div class="mobile-top-actions">
+  <button class="mobile-menu" id="menuBtn">
+☰
+</button>
+</div>
+
     <div class="app">
       <aside class="sidebar">
         <div class="logo">Note<span>fy</span></div>
@@ -1271,6 +1463,11 @@ right:15px;
 <!-- PAINEL DIREITO FORA DO MAIN -->
 <aside class="library-panel">
 
+  <button id="togglePanel" class="editor-toggle"></button>
+
+
+  
+
 <div class="library-title">
 Personalização
 </div>
@@ -1319,63 +1516,76 @@ cursor:pointer;
 
 </div>
 
-
 <div class="quick-actions">
 
 <button class="action-btn" onclick="toggleImage()">
-🖼️ Imagem
+<i>🖼️</i>
+<span>Imagem</span>
 </button>
 
 <button class="action-btn" onclick="toggleTitle()">
-📌 Título
+<i>📌</i>
+<span>Título</span>
 </button>
 
 <button class="action-btn" onclick="toggleUser()">
-👤 Usuário
+<i>👤</i>
+<span>Usuário</span>
 </button>
 
 <button class="action-btn" onclick="toggleStats()">
-❤️ Likes
+<i>❤️</i>
+<span>Likes</span>
 </button>
 
 <button class="action-btn" onclick="editLikes()">
-Editar Likes
+<i>🔥</i>
+<span>Editar</span>
 </button>
 
 <button class="action-btn" onclick="editComments()">
-Comentários
+<i>💬</i>
+<span>Comentários</span>
 </button>
 
 <button class="action-btn" onclick="editShares()">
-Compartilhar
+<i>🔁</i>
+<span>Compart.</span>
 </button>
 
 <button class="action-btn" onclick="showIconsOnly()">
-Ícones
+<i>✨</i>
+<span>Ícones</span>
 </button>
 
 <button class="action-btn" onclick="addShadow()">
-Sombra
+<i>🌑</i>
+<span>Sombra</span>
 </button>
 
 <button class="action-btn" onclick="removeShadow()">
-Sem sombra
+<i>☀️</i>
+<span>Sem sombra</span>
 </button>
 
 <button class="action-btn" onclick="roundedPost()">
-Bordas
+<i>⬜</i>
+<span>Bordas</span>
 </button>
 
 <button class="action-btn" onclick="squarePost()">
-Retas
+<i>🔲</i>
+<span>Retas</span>
 </button>
 
 <button class="action-btn" onclick="exportPNG()">
-PNG
+<i>📷</i>
+<span>PNG</span>
 </button>
 
 <button class="action-btn" onclick="shareDesign()">
-Share
+<i>🚀</i>
+<span>Share</span>
 </button>
 
 </div>
@@ -1520,74 +1730,138 @@ userInput.addEventListener('input', e => {
   currentFormat = type
   editorState.template = type
 
-  const canvas = document.getElementById('postCanvas')
+  const canvas =
+  document.getElementById('postCanvas')
 
   const buttons =
-    document.querySelectorAll('.format-btn')
+  document.querySelectorAll('.format-btn')
 
-  buttons.forEach((btn) => {
-    btn.classList.remove('format-active')
+  const mobile =
+  window.innerWidth < 900
+
+  buttons.forEach(btn=>{
+    btn.classList.remove(
+      'format-active'
+    )
   })
 
-  if (type === 'instagram') {
 
-    buttons[0]?.classList.add('format-active')
+  function applySize(
+    ratio,
+    desktop
+  ){
 
-    canvas.style.aspectRatio = '1 / 1'
-    canvas.style.maxWidth = '650px'
-    canvas.style.width = '100%'
+    canvas.style.aspectRatio=
+    ratio
+
+    if(mobile){
+
+      canvas.style.width='92vw'
+      canvas.style.maxWidth='92vw'
+
+    }else{
+
+      canvas.style.width='100%'
+      canvas.style.maxWidth=
+      desktop
+
+    }
+
+  }
+
+
+  if(type==='instagram'){
+
+    buttons[0]
+    ?.classList.add(
+    'format-active'
+    )
+
+    applySize(
+    '1 / 1',
+    '650px'
+    )
 
     renderInstagramMode()
 
-    toast('Modo Instagram')
+    toast(
+    'Modo Instagram'
+    )
+
   }
 
-  if (type === 'story') {
 
-    buttons[1]?.classList.add('format-active')
+  if(type==='story'){
 
-    canvas.style.aspectRatio = '9 / 16'
-    canvas.style.maxWidth = '420px'
-    canvas.style.width = '100%'
+    buttons[1]
+    ?.classList.add(
+    'format-active'
+    )
+
+    applySize(
+    '9 / 16',
+    '420px'
+    )
 
     renderStoryMode()
 
-    toast('Modo Story')
+    toast(
+    'Modo Story'
+    )
+
   }
 
-  if (type === 'youtube') {
 
-    buttons[2]?.classList.add('format-active')
+  if(type==='youtube'){
 
-    canvas.style.aspectRatio = '16 / 9'
-    canvas.style.maxWidth = '1000px'
-    canvas.style.width = '100%'
+    buttons[2]
+    ?.classList.add(
+    'format-active'
+    )
+
+    applySize(
+    '16 / 9',
+    '1000px'
+    )
 
     renderYoutubeMode()
 
-    toast('Modo YouTube')
+    toast(
+    'Modo YouTube'
+    )
+
   }
 
-  if (type === 'tweet') {
 
-    canvas.style.aspectRatio = '16 / 10'
-    canvas.style.maxWidth = '850px'
-    canvas.style.width = '100%'
+  if(type==='tweet'){
+
+    applySize(
+    '16 / 10',
+    '850px'
+    )
 
     renderTweetMode()
 
-    toast('Modo Tweet/X')
+    toast(
+    'Modo Tweet/X'
+    )
+
   }
 
-  if (type === 'threads') {
 
-    canvas.style.aspectRatio = '1 / 1'
-    canvas.style.maxWidth = '650px'
-    canvas.style.width = '100%'
+  if(type==='threads'){
+
+    applySize(
+    '1 / 1',
+    '650px'
+    )
 
     renderThreadsMode()
 
-    toast('Modo Threads')
+    toast(
+    'Modo Threads'
+    )
+
   }
 
 }
@@ -3866,6 +4140,287 @@ window.onerror = function(msg,url,line){
    console.log("LINHA:",line)
 }
 
+/* ==========================================
+   SWIPE TEMPLATES MOBILE
+========================================== */
+
+const templateFlow=[
+
+'purple',
+'blue',
+'orange',
+'black',
+'green',
+'pink',
+
+'tweetDark',
+'tweetLight',
+
+'whatsapp',
+'linkedin',
+
+'spotify',
+'quote'
+
+]
+
+let currentTemplateIndex=0
+
+function loadTemplateByIndex(){
+
+const current=
+templateFlow[currentTemplateIndex]
+
+switch(current){
+
+case 'purple':
+setTemplate('purple')
+break
+
+case 'blue':
+setTemplate('blue')
+break
+
+case 'orange':
+setTemplate('orange')
+break
+
+case 'black':
+setTemplate('black')
+break
+
+case 'green':
+setTemplate('green')
+break
+
+case 'pink':
+setTemplate('pink')
+break
+
+case 'tweetDark':
+tweetDarkTemplate()
+break
+
+case 'tweetLight':
+tweetLightTemplate()
+break
+
+case 'whatsapp':
+whatsappTemplate()
+break
+
+case 'linkedin':
+linkedinTemplate()
+break
+
+case 'spotify':
+spotifyTemplate()
+break
+
+case 'quote':
+quoteTemplate()
+break
+
+}
+
+showTemplateName()
+
+}
+
+
+/* nome aparecendo em cima */
+
+function showTemplateName(){
+
+let badge=
+document.getElementById(
+'templateSwipeName'
+)
+
+if(!badge){
+
+badge=document.createElement('div')
+
+badge.id='templateSwipeName'
+
+document.body.appendChild(badge)
+
+}
+
+badge.innerHTML=
+templateFlow[currentTemplateIndex]
+.toUpperCase()
+
+badge.style.opacity=1
+
+setTimeout(()=>{
+
+badge.style.opacity=0
+
+},1400)
+
+}
+
+
+/* TOUCH */
+
+let touchStartX=0
+let touchEndX=0
+
+postCanvas.addEventListener(
+'touchstart',
+e=>{
+
+touchStartX=
+e.changedTouches[0].clientX
+
+},
+{passive:true}
+)
+
+
+postCanvas.addEventListener(
+'touchend',
+e=>{
+
+touchEndX=
+e.changedTouches[0].clientX
+
+handleSwipe()
+
+},
+{passive:true}
+)
+
+
+function handleSwipe(){
+
+const distance=
+touchEndX-touchStartX
+
+
+/* arrastou esquerda */
+
+if(distance<-60){
+
+currentTemplateIndex++
+
+if(
+currentTemplateIndex>
+templateFlow.length-1
+){
+
+currentTemplateIndex=0
+
+}
+
+loadTemplateByIndex()
+
+}
+
+
+/* arrastou direita */
+
+if(distance>60){
+
+currentTemplateIndex--
+
+if(
+currentTemplateIndex<0
+){
+
+currentTemplateIndex=
+templateFlow.length-1
+
+}
+
+loadTemplateByIndex()
+
+}
+
+}
+
+
+document
+.getElementById("menuBtn")
+.addEventListener("click",()=>{
+
+document
+.querySelector(".sidebar")
+.classList.toggle("open")
+
+})
+
+/* painel mobile abre/fecha */
+
+const panel =
+document.querySelector(".library-panel");
+
+const toggle =
+document.getElementById("togglePanel");
+
+toggle.addEventListener("click",()=>{
+
+panel.classList.toggle(
+"expanded"
+);
+
+});
+
+
+/* swipe painel mobile */
+
+let startY=0;
+
+panel.addEventListener(
+"touchstart",
+e=>{
+
+startY=
+e.changedTouches[0].clientY
+
+},
+{passive:true}
+)
+
+panel.addEventListener(
+"touchend",
+e=>{
+
+let endY=
+e.changedTouches[0].clientY
+
+let distance=
+startY-endY
+
+
+/* arrastou pra cima */
+
+if(distance>40){
+
+panel.classList.add(
+"expanded"
+)
+
+}
+
+
+/* arrastou pra baixo */
+
+if(distance<-40){
+
+panel.classList.remove(
+"expanded"
+)
+
+}
+
+},
+{passive:true}
+)
+
     </script>
+
+
   </body>
 </html>
