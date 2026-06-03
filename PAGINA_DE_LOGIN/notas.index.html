@@ -889,31 +889,27 @@ display:none;
 
 html,body{
 margin:0;
-height:100%;
-overflow:hidden;
+min-height:100%;
+overflow-x:hidden;
+overflow-y:auto;
+
 }
 
 .app{
 display:block;
-height:100vh;
+min-height:100vh;
 position:relative;
-overflow:hidden;
+overflow:visible;
 }
 
 /* preview ocupa quase tela toda */
 
+
 .workspace{
-position:absolute;
-top:0;
-left:0;
-right:0;
-bottom:82px;
-
-overflow:auto;
-
-padding:20px 12px 120px;
-
-z-index:1;
+  position:relative;
+  min-height:calc(100vh - 82px);
+  padding:20px 12px 120px;
+  overflow-y:auto;
 }
 
 
@@ -1649,11 +1645,11 @@ cursor:pointer;
 
   text: 'Crie posts incríveis para redes sociais.',
 
-  likes: '4.8M',
+  likes: '',
 
-  comments: '284K',
+  comments: '',
 
-  shares: '93K',
+  shares: '',
 
   verified: true,
 
