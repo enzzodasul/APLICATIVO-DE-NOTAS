@@ -1254,7 +1254,7 @@ line-height:.95!important;
     <input
       id="userInput"
       class="input"
-      placeholder="@notefy"
+      placeholder="@DaSul-Post"
     />
   </div>
 
@@ -1424,8 +1424,9 @@ line-height:.95!important;
         </a>
 
         <div class="topbar-right">
-            <button class="btn btn-secondary">
-                Salvar Projeto
+            <button class="btn btn-secondary"
+              id="btnSalvarProjeto">
+                Salvar Post
             </button>
         </div>
     </div>
@@ -1455,139 +1456,6 @@ line-height:.95!important;
 
 </main>
 
-
-<!-- PAINEL DIREITO FORA DO MAIN -->
-<aside class="library-panel">
-
-  <button id="togglePanel" class="editor-toggle"></button>
-
-
-  
-
-<div class="library-title">
-Personalização
-</div>
-
-<div class="asset-list">
-
-<div style="grid-column:1/-1;">
-
-<label>
-🎨 Cor do Fundo
-</label>
-
-<input
-type="color"
-value="#5865f2"
-onchange="changeBackgroundColor(this.value)"
-style="
-width:100%;
-height:50px;
-border:none;
-border-radius:12px;
-cursor:pointer;
-">
-
-</div>
-
-<div style="grid-column:1/-1;">
-
-<label>
-🔤 Cor do Texto
-</label>
-
-<input
-type="color"
-value="#ffffff"
-onchange="changeTextColor(this.value)"
-style="
-width:100%;
-height:50px;
-border:none;
-border-radius:12px;
-cursor:pointer;
-">
-
-</div>
-
-</div>
-
-<div class="quick-actions">
-
-<button class="action-btn" onclick="toggleImage()">
-<i>🖼️</i>
-<span>Imagem</span>
-</button>
-
-<button class="action-btn" onclick="toggleTitle()">
-<i>📌</i>
-<span>Título</span>
-</button>
-
-<button class="action-btn" onclick="toggleUser()">
-<i>👤</i>
-<span>Usuário</span>
-</button>
-
-<button class="action-btn" onclick="toggleStats()">
-<i>❤️</i>
-<span>Likes</span>
-</button>
-
-<button class="action-btn" onclick="editLikes()">
-<i>🔥</i>
-<span>Editar</span>
-</button>
-
-<button class="action-btn" onclick="editComments()">
-<i>💬</i>
-<span>Comentários</span>
-</button>
-
-<button class="action-btn" onclick="editShares()">
-<i>🔁</i>
-<span>Compart.</span>
-</button>
-
-<button class="action-btn" onclick="showIconsOnly()">
-<i>✨</i>
-<span>Ícones</span>
-</button>
-
-<button class="action-btn" onclick="addShadow()">
-<i>🌑</i>
-<span>Sombra</span>
-</button>
-
-<button class="action-btn" onclick="removeShadow()">
-<i>☀️</i>
-<span>Sem sombra</span>
-</button>
-
-<button class="action-btn" onclick="roundedPost()">
-<i>⬜</i>
-<span>Bordas</span>
-</button>
-
-<button class="action-btn" onclick="squarePost()">
-<i>🔲</i>
-<span>Retas</span>
-</button>
-
-<button class="action-btn" onclick="exportPNG()">
-<i>📷</i>
-<span>PNG</span>
-</button>
-
-<button class="action-btn" onclick="shareDesign()">
-<i>🚀</i>
-<span>Share</span>
-</button>
-
-</div>
-
-</aside>
-</div>
 
     <script>
      
@@ -1639,9 +1507,9 @@ cursor:pointer;
 
       const editorState = {
 
-  username: '@notefy',
+  username: '@DaSul-Post',
 
-  title: 'CREATOR MODE',
+  title: '',
 
   text: 'Crie posts incríveis para redes sociais.',
 
@@ -1669,11 +1537,11 @@ cursor:pointer;
 
   showUser: true,
 
-  showLikes: true,
+  showLikes: false,
 
-  showComments: true,
+  showComments: false,
 
-  showShares: true,
+  showShares: false,
 
 }
       titleInput.addEventListener('input', e => {
@@ -1698,7 +1566,7 @@ textInput.addEventListener('input', e => {
 userInput.addEventListener('input', e => {
 
   editorState.username =
-    e.target.value || '@notefy'
+    e.target.value || '@DaSul-Post'
 
   renderTemplate()
 
@@ -1966,7 +1834,7 @@ opacity:.6;
 margin-bottom:18px;
 ">
 
-11:42 AM · Jul 18, 2025
+ hoje
 
 </div>
 
@@ -2425,7 +2293,7 @@ font-weight:800;
 font-size:18px;
 ">
 
-${userInput.value || '@notefy'}
+${userInput.value || '@DaSul-Post'}
 
 </div>
 
@@ -2434,7 +2302,7 @@ opacity:.6;
 font-size:14px;
 ">
 
-há 2h
+agora
 
 </div>
 
@@ -2527,7 +2395,7 @@ font-size:18px;
 font-weight:800;
 ">
 
-${userInput.value || '@notefy'}
+${userInput.value || '@DaSul-Post'}
 
 <i
 class="fa-solid fa-circle-check"
@@ -2539,7 +2407,7 @@ style="color:#1d9bf0"></i>
 opacity:.7;
 ">
 
-@viralpost
+@DaSul-Post
 
 </div>
 
@@ -2553,7 +2421,7 @@ line-height:1.5;
 font-weight:500;
 ">
 
-${textInput.value || 'Esse template ficou absurdo 🔥'}
+${textInput.value || ' absurdo 🔥'}
 
 </div>
 
@@ -2566,7 +2434,7 @@ opacity:.6;
 margin-bottom:15px;
 ">
 
-8:41 PM · Today
+ hoje
 
 </div>
 
@@ -2623,7 +2491,7 @@ font-size:18px;
 font-weight:800;
 ">
 
-${userInput.value || '@notefy'}
+${userInput.value || '@DaSul-Post'}
 
 </div>
 
@@ -2657,7 +2525,7 @@ opacity:.6;
 margin-bottom:15px;
 ">
 
-8:41 PM · Today
+hoje
 
 </div>
 
@@ -2702,7 +2570,7 @@ opacity:.8;
 text-align:right;
 ">
 
-21:48 ✓✓
+ ✓✓
 
 </div>
 
@@ -2761,7 +2629,7 @@ opacity:.6;
 font-size:14px;
 ">
 
-CEO • Creator
+
 
 </div>
 
@@ -2974,7 +2842,7 @@ margin-top:30px;
 opacity:.7;
 ">
 
-${userInput.value || '@notefy'}
+${userInput.value || '@DaSul-Post'}
 
 </div>
 
@@ -3050,9 +2918,9 @@ opacity:.7;
 font-size:14px;
 ">
 
-<span>NOTEFY NEWS</span>
+<span>DaSul-Post Viral</span>
 
-<span>AO VIVO</span>
+<span></span>
 
 </div>
 
@@ -3083,7 +2951,7 @@ letter-spacing:4px;
 margin-bottom:20px;
 ">
 
-OFERTA ESPECIAL
+
 
 </div>
 
@@ -3384,7 +3252,7 @@ function setTemplate(type) {
 
       <div>
       <div style="font-size:20px;font-weight:800;">
-      ${userInput.value || '@notefy'}
+      ${userInput.value || '@DaSul-Post'}
       </div>
 
       <div style="opacity:.7;">
@@ -3463,7 +3331,7 @@ function setTemplate(type) {
 
       <div>
       <div style="font-size:20px;font-weight:800;">
-      ${userInput.value || '@notefy'}
+      ${userInput.value || '@DaSul-Post'}
       </div>
       </div>
 
@@ -3539,7 +3407,7 @@ function setTemplate(type) {
       font-weight:700;
       color:#ea580c;
       ">
-      ${userInput.value || '@notefy'}
+      ${userInput.value || '@DaSul-Post'}
       </div>
 
       <div style="
@@ -3614,7 +3482,7 @@ applyGlobalVisibility()
       font-size:14px;
       margin-bottom:20px;
       ">
-      ${userInput.value || '@notefy'}
+      ${userInput.value || '@DaSul-Post'}
       </div>
 
       <div style="
@@ -3678,7 +3546,7 @@ applyGlobalVisibility()
 
       <div>
       <div style="font-size:22px;font-weight:900;">
-      ${userInput.value || '@notefy'}
+      ${userInput.value || '@DaSul-Post'}
       </div>
 
       <div>FITNESS PRO</div>
@@ -3751,7 +3619,7 @@ applyGlobalVisibility()
       font-size:18px;
       margin-bottom:20px;
       ">
-      ${userInput.value || '@notefy'}
+      ${userInput.value || '@DaSul-Post'}
       </div>
 
       <div style="

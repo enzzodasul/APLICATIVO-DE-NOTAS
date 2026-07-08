@@ -6,6 +6,11 @@ NOTEFY STUDIO
 TOAST
 ========================================= */
 
+const btnSalvar = document.getElementById('btnSalvarProjeto');
+
+btnSalvar.addEventListener('click', salvarProjeto);
+
+
 function mostrarToast(texto) {
   const antigo = document.querySelector('.toast-notefy')
 
@@ -221,3 +226,5 @@ function toggleLikes() {
       ? 'flex'
       : 'none';
 }
+
+
